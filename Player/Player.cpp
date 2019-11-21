@@ -30,13 +30,13 @@ std::pair< sf::Vector2f, Actions > Player::getAction()
         return {Directions::Stop, Actions::None};
 }
 
-void Player::setViewSize(sf::Vector2f ViewSize)
+void Player::setViewSize(sf::Vector2f NewSize)
 {
     const sf::Vector2f defaultSize{960, 540};
     float scaleFactor = 1;
-    while(ViewSize.x / scaleFactor > defaultSize.x || ViewSize.y / scaleFactor > defaultSize.y)
+    while(NewSize.x / scaleFactor > defaultSize.x || NewSize.y / scaleFactor > defaultSize.y)
         scaleFactor++;
-    PlayerView.setSize(ViewSize.x / scaleFactor, ViewSize.y / scaleFactor);
+    PlayerView.setSize(NewSize.x / scaleFactor, NewSize.y / scaleFactor);
 }
 
 void Player::UpdateView()

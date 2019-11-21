@@ -11,6 +11,6 @@ public:
     void draw();
     void loadFromFile(std::string fileName);
 private:
-    std::vector< std::pair< sf::RectangleShape, std::shared_ptr< sf::Texture > > > BigRects;
+    class std::vector< std::pair< sf::RectangleShape, std::shared_ptr< sf::Texture > > > BigRects;
     sf::Vector2u imageSize;
 };
