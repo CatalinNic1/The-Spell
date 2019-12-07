@@ -1,5 +1,6 @@
 #include "BigRect.hpp"
 #include "../CentralStuff/GUIWrapper.hpp"
+#include <iostream>
 
 void BigRect::loadFromFile(std::string fileName)
 {
@@ -28,4 +29,9 @@ void BigRect::draw()
 {
     for(std::pair< sf::RectangleShape, std::shared_ptr< sf::Texture > > Rect : BigRects)
         AppWindow.draw(Rect.first);
+}
+sf::Vector2f BigRect::getSize()
+{
+    return static_cast<sf::Vector2f>(imageSize);
+    std::cout << "Harta: " << imageSize.x << " " << imageSize.y << "/n";
 }

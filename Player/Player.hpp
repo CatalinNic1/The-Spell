@@ -2,6 +2,7 @@
 
 #include "../Entity/Entity.hpp"
 #include  "EventHandler/EventHandler.hpp"
+#include "Camera/Camera.hpp"
 
 class Player : public Entity 
 {
@@ -12,29 +13,19 @@ private:
     /// @return A predefined direction and a action to animate
     ///
     std::pair< sf::Vector2f, Actions > getAction();
-    // Player perspective
-    sf::View PlayerView;
-    ///
-    /// @brief Getting the central position with a formula
-    ///
-    /// @return The Central Position Used by the View
-    ///
-    sf::Vector2f getCenterPosition();
-    ///
-    /// @brief Does what you see
-    ///
-    void UpdateView();
-    ///
-    /// @brief After it gets an Action and a Direction It will perform that action
-    ///
-    /// @param DeltaTime - Time between frames
-    ///
-    void ProcessInput(float DeltaTime);
+    // Player's perspective
+    Camera PlayerCamera;
 public:
     ///
     /// @brief The Initializer
     /// 
     Player(sf::Vector2f Position, sf::Vector2f Size, std::string TextureFileName);
+    ///
+    /// @brief Used for scaling the Cmera in order to support multiple resoultions 
+    ///
+    /// @param NewSize - The size of window after beeing resized
+    ///
+    void setCameraSize(sf::Vector2f NewSize);
     ///
     /// @brief Calls all function like: UpdateView and ProcessInput
     ///
@@ -42,13 +33,17 @@ public:
     ///
     void Update(float DeltaTime);
     ///
-    /// @brief Used for scaling the perspective in order to support multiple resoultions 
+    /// @return Player's camera
     ///
-    /// @param NewSize - The size of window after beeing resized
+    sf::View getPlayerCamera();
     ///
-    void setViewSize(sf::Vector2f NewSize);
+    /// @brief Setup "The Level Border" 
     ///
-    /// @return Player's perspective
+    /// @param Limits - The Size of the level
     ///
-    sf::View getPlayerView();
+    void setLevelLimits(sf::Vector2f Limits);
+    ///
+    /// @brief Does what you see
+    ///
+    void UpdateCamera();
 };

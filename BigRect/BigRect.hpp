@@ -10,6 +10,7 @@ class BigRect
 public:
     void draw();
     void loadFromFile(std::string fileName);
+    sf::Vector2f getSize();
 private:
     class std::vector< std::pair< sf::RectangleShape, std::shared_ptr< sf::Texture > > > BigRects;
     sf::Vector2u imageSize;

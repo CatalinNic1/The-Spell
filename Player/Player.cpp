@@ -1,15 +1,10 @@
 #include "Player.hpp"
+#include <iostream>
 
 Player::Player(sf::Vector2f Position, sf::Vector2f Size, std::string TextureFileName): 
     Entity(Position, Size, TextureFileName) {}
 
 void Player::Update(float DeltaTime)
-{
-    ProcessInput(DeltaTime);
-    UpdateView();
-}
-
-void Player::ProcessInput(float DeltaTime)
 {
     auto [PlayerDirection, PlayerAction] = getAction();
     moveEntity(DeltaTime, PlayerDirection);
@@ -30,26 +25,22 @@ std::pair< sf::Vector2f, Actions > Player::getAction()
         return {Directions::Stop, Actions::None};
 }
 
-void Player::setViewSize(sf::Vector2f NewSize)
+void Player::setCameraSize(sf::Vector2f NewSize)
 {
-    const sf::Vector2f defaultSize{960, 540};
-    float scaleFactor = 1;
-    while(NewSize.x / scaleFactor > defaultSize.x || NewSize.y / scaleFactor > defaultSize.y)
-        scaleFactor++;
-    PlayerView.setSize(NewSize.x / scaleFactor, NewSize.y / scaleFactor);
+    PlayerCamera.setCameraSize(NewSize);
 }
 
-void Player::UpdateView()
+void Player::UpdateCamera()
 {
-    PlayerView.setCenter(getCenterPosition());
+    PlayerCamera.UpdateCamera(EntityRect.getGlobalBounds());
 }
 
-sf::Vector2f Player::getCenterPosition()
+sf::View Player::getPlayerCamera()
 {
-    return EntityRect.getPosition() + (EntityRect.getSize() / 2.f);
+    return PlayerCamera;
 }
 
-sf::View Player::getPlayerView()
+void Player::setLevelLimits(sf::Vector2f Limits)
 {
-    return PlayerView;
+    PlayerCamera.setLevelLimits(Limits);
 }

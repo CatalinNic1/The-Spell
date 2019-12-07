@@ -1,7 +1,6 @@
 #pragma once
 
 #include <SFML/Window/Keyboard.hpp>
-#include <SFML/Graphics/View.hpp>
 
 class getInput
 {
