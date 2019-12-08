@@ -23,11 +23,9 @@ private:
     ///
     /// @brief If the limit is exceed getCameraDirection will call this function in order to return the type of collision 
     ///
-    /// @param CameraPosition - You can figure out
-    ///
     /// @return Same thing as the function from above
     ///
-    std::pair< sf::Vector2f, Camera::Collisions > getCollisionType(sf::Vector2f CameraPosition);
+    std::pair< sf::Vector2f, Camera::Collisions > getCollisionType();
     ///
     /// @brief After exceeding the limit the moving function will have a little but semnificative error and this function will correct it
     ///

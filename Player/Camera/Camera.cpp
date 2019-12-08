@@ -37,27 +37,27 @@ void Camera::correctCamera(Camera::Collisions CollisionType)
 std::pair< sf::Vector2f, Camera::Collisions > Camera::getCameraDirection()
 {
     sf::Vector2f CameraPosition = getCenter();
-    if(PlayerCentralPosition.y < CameraPosition.y && CameraPosition.y - CameraSize.y / 2.f > 0.f)
+    if(PlayerCentralPosition.y < CameraPosition.y && PlayerCentralPosition.y - CameraSize.y / 2.f > 0.f)
         return {Axis::Vertical, Collisions::Nope};
-    else if(PlayerCentralPosition.y > CameraPosition.y && CameraPosition.y + CameraSize.y / 2.f < LevelLimits.y)
+    else if(PlayerCentralPosition.y > CameraPosition.y && PlayerCentralPosition.y + CameraSize.y / 2.f < LevelLimits.y)
         return {Axis::Vertical, Collisions::Nope};
-    else if(PlayerCentralPosition.x < CameraPosition.x && CameraPosition.x - CameraSize.x / 2.f > 0.f)
+    else if(PlayerCentralPosition.x < CameraPosition.x && PlayerCentralPosition.x - CameraSize.x / 2.f > 0.f)
         return {Axis::Horizontal, Collisions::Nope};
-    else if(PlayerCentralPosition.x > CameraPosition.x && CameraPosition.x + CameraSize.x / 2.f < LevelLimits.x)
+    else if(PlayerCentralPosition.x > CameraPosition.x && PlayerCentralPosition.x + CameraSize.x / 2.f < LevelLimits.x)
         return {Axis::Horizontal, Collisions::Nope};
     else
-        return getCollisionType(CameraPosition);
+        return getCollisionType();
 }
 
-std::pair< sf::Vector2f, Camera::Collisions > Camera::getCollisionType(sf::Vector2f CameraPosition)
+std::pair< sf::Vector2f, Camera::Collisions > Camera::getCollisionType()
 {
-    if(CameraPosition.y - CameraSize.y / 2.f < 0.f)
+    if(PlayerCentralPosition.y - CameraSize.y / 2.f < 0.f)
         return {Axis::None, Collisions::Up};
-    else if(CameraPosition.y + CameraSize.y / 2.f > LevelLimits.y)
+    else if(PlayerCentralPosition.y + CameraSize.y / 2.f > LevelLimits.y)
         return {Axis::None, Collisions::Down};
-    else if(CameraPosition.x - CameraSize.x / 2.f < 0.f)
+    else if(PlayerCentralPosition.x - CameraSize.x / 2.f < 0.f)
         return {Axis::None, Collisions::Left};
-    else if(CameraPosition.x + CameraSize.x / 2.f > LevelLimits.x)
+    else if(PlayerCentralPosition.x + CameraSize.x / 2.f > LevelLimits.x)
         return {Axis::None, Collisions::Right};
     else
         return {Axis::None, Collisions::Nope};
