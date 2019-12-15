@@ -17,15 +17,15 @@ private:
     ///
     /// @brief Get a specific (sort of) direction accordingly
     ///
-    /// @return A direction axy and if it exceed a limit it will also return a collision type
+    /// @return A direction axy and if it exceed a limi
     ///
-    std::pair< sf::Vector2f, Camera::Collisions > getCameraDirection();
+    sf::Vector2f getCameraDirection();
     ///
-    /// @brief If the limit is exceed getCameraDirection will call this function in order to return the type of collision 
+    /// @brief This function in order to return the type of collision 
     ///
-    /// @return Same thing as the function from above
+    /// @return  A collision type
     ///
-    std::pair< sf::Vector2f, Camera::Collisions > getCollisionType();
+    Camera::Collisions getCollisionType();
     ///
     /// @brief After exceeding the limit the moving function will have a little but semnificative error and this function will correct it
     ///

@@ -7,11 +7,14 @@ int main()
 {
     AppWindow.create(sf::VideoMode(800, 600), "app", sf::Style::Default);
     AppWindow.setVerticalSyncEnabled(true);
-    Player Player({628.f, 368.f}, {24.f, 32.f}, "Resources/Player.png");
+    
+    Player Player({628, 368}, {24, 32}, "Resources/Player.png");
     Player.setCameraSize({800, 600});
+    Player.setLevelLimits({1280, 768});
+
     BigRect Map;
     Map.loadFromFile("Resources/Thevillage.png");
-    Player.setLevelLimits({1280, 768});
+
     while(AppWindow.isOpen())
     {
         while(AppWindow.pollEvent(AppEvent))
@@ -25,7 +28,9 @@ int main()
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
             AppWindow.close();
         AppWindow.clear();
-        Player.Update(AppClock.restart().asSeconds());
+        DeltaTime = AppClock.restart().asSeconds();
+        Player.Update(DeltaTime);
+        Player.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}), false, Entity::CollisionTypes::Inwards);
         Player.UpdateCamera();
         AppWindow.setView(Player.getPlayerCamera());
         Map.draw();
