@@ -8,7 +8,7 @@ int main()
     AppWindow.create(sf::VideoMode(800, 600), "app", sf::Style::Default);
     AppWindow.setVerticalSyncEnabled(true);
     
-    Player Player({628, 368}, {24, 32}, "Resources/Player.png");
+    Player Player({650, 540}, {24, 32}, "Resources/Player.png");
     Player.setCameraSize({800, 600});
     Player.setLevelLimits({1280, 768});
 
@@ -35,9 +35,10 @@ int main()
         AppWindow.clear();
         DeltaTime = AppClock.restart().asSeconds();
         Player.Update(DeltaTime);
-        Cage.moveRect(DeltaTime, SmartRect::Directions::Up, 0.1f);
+        Cage.moveRect(DeltaTime, SmartRect::Directions::Down, 0.1f);
         Player.EntityRect.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
         Player.EntityRect.CheckCollision(Cage, SmartRect::CollisionTypes::Outwards);
+        //Cage.CheckCollision(Player.EntityRect, SmartRect::CollisionTypes::Outwards);
         Cage.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
         Player.UpdateCamera();
         AppWindow.setView(Player.getPlayerCamera());
