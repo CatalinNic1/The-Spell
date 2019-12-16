@@ -12,6 +12,11 @@ int main()
     Player.setCameraSize({800, 600});
     Player.setLevelLimits({1280, 768});
 
+    SmartRect Cage;
+    Cage.setPosition(600, 400);
+    Cage.setSize({50, 50});
+    Cage.setFillColor(sf::Color(123, 231, 43));
+
     BigRect Map;
     Map.loadFromFile("Resources/Thevillage.png");
 
@@ -30,10 +35,14 @@ int main()
         AppWindow.clear();
         DeltaTime = AppClock.restart().asSeconds();
         Player.Update(DeltaTime);
-        Player.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}), false, Entity::CollisionTypes::Inwards);
+        Cage.moveRect(DeltaTime, SmartRect::Directions::Left, 0.1f);
+        Player.EntityRect.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
+        Player.EntityRect.CheckCollision(Cage, SmartRect::CollisionTypes::Outwards);
+        Cage.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
         Player.UpdateCamera();
         AppWindow.setView(Player.getPlayerCamera());
         Map.draw();
+        AppWindow.draw(Cage);
         AppWindow.draw(Player.EntityRect);
         AppWindow.display();
     }

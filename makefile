@@ -6,7 +6,7 @@ CFLAGS = -c -pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy
 
 all: The_spell clean
 
-The_spell: main.o Entity.o Player.o ResourceManager.o BigRect.o Animation.o getInput.o Camera.o
+The_spell: main.o Entity.o Player.o ResourceManager.o BigRect.o Animation.o getInput.o Camera.o SmartRect.o
 	$(CC) -no-pie -s *o -o The_spell -ltgui -lsfml-graphics -lsfml-window -lsfml-system
 
 main.o: Main.cpp
@@ -32,6 +32,9 @@ getInput.o:
 
 Camera.o:
 	$(CC) $(CFLAGS) Player/Camera/Camera.cpp
+
+SmartRect.o:
+	$(CC) $(CFLAGS) SmartRect/SmartRect.cpp
 
 clean:
 	rm -rf *o

@@ -14,15 +14,15 @@ void Player::Update(float DeltaTime)
 std::pair< sf::Vector2f, Actions > Player::getAction()
 {
     if(getInput::OnlyMovingUp())
-        return {Directions::Up, Actions::MoveUp};
+        return {SmartRect::Directions::Up, Actions::MoveUp};
     else if(getInput::OnlyMovingDown())
-        return {Directions::Down, Actions::MoveDown};
+        return {SmartRect::Directions::Down, Actions::MoveDown};
     else if(getInput::OnlyMovingLeft())
-        return {Directions::Left, Actions::MoveLeft};
+        return {SmartRect::Directions::Left, Actions::MoveLeft};
     else if(getInput::OnlyMovingRight())
-        return {Directions::Right, Actions::MoveRight};
+        return {SmartRect::Directions::Right, Actions::MoveRight};
     else
-        return {Directions::Stop, Actions::None};
+        return {SmartRect::Directions::Stop, Actions::None};
 }
 
 void Player::setCameraSize(sf::Vector2f NewSize)
