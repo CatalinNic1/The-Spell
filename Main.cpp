@@ -35,7 +35,7 @@ int main()
         AppWindow.clear();
         DeltaTime = AppClock.restart().asSeconds();
         Player.Update(DeltaTime);
-        Cage.moveRect(DeltaTime, SmartRect::Directions::Left, 0.1f);
+        Cage.moveRect(DeltaTime, SmartRect::Directions::Up, 0.1f);
         Player.EntityRect.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
         Player.EntityRect.CheckCollision(Cage, SmartRect::CollisionTypes::Outwards);
         Cage.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));

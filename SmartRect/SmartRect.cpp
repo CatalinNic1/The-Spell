@@ -16,7 +16,7 @@ sf::Vector2f SmartRect::getCollisionDirection(SmartRect OtherObject)
     if(OtherObject.MovingDirection == Directions::Up)
     {
         // Up
-        PseudoLine = sf::FloatRect(OtherObjectFloatRect.left, OtherObjectFloatRect.top + PseudoLineThickness, OtherObjectFloatRect.width, PseudoLineThickness);
+        PseudoLine = sf::FloatRect(OtherObjectFloatRect.left, OtherObjectFloatRect.top - PseudoLineThickness, OtherObjectFloatRect.width, PseudoLineThickness);
         if(ObjectFloatRect.intersects(PseudoLine))
             return Directions::Down;
     }
@@ -41,7 +41,6 @@ sf::Vector2f SmartRect::getCollisionDirection(SmartRect OtherObject)
         if(ObjectFloatRect.intersects(PseudoLine))
             return Directions::Left;
     }
-    std::printf("%s", "Collision\n");
     return MovingDirection;
 }
 
@@ -59,7 +58,7 @@ bool SmartRect::CheckCollision(SmartRect& OtherObject, CollisionTypes CollisionT
 {
     if(CollisionType == CollisionTypes::Inwards)
     {
-        sf::Vector2f Difference = getInwardsCollision(OtherObject) + getCollisionDirection(OtherObject);
+        sf::Vector2f Difference = getInwardsCollision(OtherObject);
         move(Difference);
         if(Difference != Axis::None)
             return true;
@@ -68,7 +67,7 @@ bool SmartRect::CheckCollision(SmartRect& OtherObject, CollisionTypes CollisionT
     }
     else if(CollisionType == CollisionTypes::Outwards)
     {
-        sf::Vector2f Difference = getOutwardsCollision(OtherObject) * 1.1f;
+        sf::Vector2f Difference = getOutwardsCollision(OtherObject) + -MovingDirection;
         move(Difference);
         if(Difference != Axis::None)
             return true;
@@ -96,17 +95,17 @@ sf::Vector2f SmartRect::getOutwardsCollision(SmartRect OtherObject)
 {
     sf::FloatRect ObjectFloatRect = getGlobalBounds();
     sf::FloatRect OtherObjectFloatRect = OtherObject.getGlobalBounds();
-    sf::Vector2f CollisionDirection = getCollisionDirection(OtherObject);
+    MovingDirection = getCollisionDirection(OtherObject);
 
     if(ObjectFloatRect.intersects(OtherObjectFloatRect))
     {
-        if(CollisionDirection == Directions::Up)
+        if(MovingDirection == Directions::Up)
             return Axis::Vertical * (OtherObjectFloatRect.height + OtherObjectFloatRect.top - ObjectFloatRect.top);
-        else if(CollisionDirection == Directions::Down)
+        else if(MovingDirection == Directions::Down)
             return Axis::Vertical * (OtherObjectFloatRect.top - (ObjectFloatRect.top + ObjectFloatRect.height));
-        else if(CollisionDirection == Directions::Left)
+        else if(MovingDirection == Directions::Left)
             return Axis::Horizontal * (OtherObjectFloatRect.width + OtherObjectFloatRect.left - ObjectFloatRect.left);
-        else if(CollisionDirection == Directions::Right)
+        else if(MovingDirection == Directions::Right)
             return Axis::Horizontal * (OtherObjectFloatRect.left - (ObjectFloatRect.left + ObjectFloatRect.width));   
     }
     return Axis::None;
