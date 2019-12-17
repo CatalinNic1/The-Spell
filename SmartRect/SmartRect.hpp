@@ -8,17 +8,16 @@ private:
     // Self-explanatory
     const float MovingSpeed = 450.f;
     //
-    float PseudoLineThickness = 0.f;
+    float PseudoLineThickness = 2.f;
     // Used for defining directions for collision instead of using magic numbers
     struct Axis
     {
-        static inline const sf::Vector2f None = {0, 0};
-        static inline const sf::Vector2f Vertical = {0, 1};
-        static inline const sf::Vector2f Horizontal = {1, 0};
+        static inline const sf::Vector2f None = {0.f, 0.f};
+        static inline const sf::Vector2f Vertical = {0.f, 1.f};
+        static inline const sf::Vector2f Horizontal = {1.f, 0.f};
     };
     // Used in collisions
-    bool Movable = true;
-    sf::Vector2f MovingDirection = {0, 0};
+    sf::Vector2f MovingDirection = {0.f, 0.f};
     ///
     /// @brief This is where collision is check, but inwards
     ///
@@ -36,7 +35,7 @@ private:
     ///
     sf::Vector2f getInwardsCollision(sf::FloatRect OtherObjectFloatRect);
     ///
-    /// @brief This is where collision is check, but inwards
+    /// @brief This is where collision is check, but outwards
     ///
     /// @param OtherObject - The Object itself
     ///
@@ -44,18 +43,22 @@ private:
     ///
     sf::Vector2f getOutwardsCollision(SmartRect OtherObject);
     ///
+    /// @brief Used for colliding with 2 moving objects in order to get the direction based on a "PesudoLine" (range area) in that direction
     ///
+    /// @param OtherObject - The Object itself
+    ///
+    /// @return a Direction (see Directions declared below)
     ///
     sf::Vector2f getCollisionDirection(SmartRect OtherObject);
 public:
     // Used for defining directions instead of using magic numbers
     struct Directions
     {
-        static inline const sf::Vector2f Stop = {0, 0};
-        static inline const sf::Vector2f Up = {0, -1};
-        static inline const sf::Vector2f Down = {0, 1};
-        static inline const sf::Vector2f Left = {-1, 0};
-        static inline const sf::Vector2f Right = {1, 0};
+        static inline const sf::Vector2f Stop = {0.f, 0.f};
+        static inline const sf::Vector2f Up = {0.f, -1.f};
+        static inline const sf::Vector2f Down = {0.f, 1.f};
+        static inline const sf::Vector2f Left = {-1.f, 0.f};
+        static inline const sf::Vector2f Right = {1.f, 0.f};
     };
     // You got it
     enum class CollisionTypes
