@@ -13,9 +13,6 @@ sf::Vector2f SmartRect::getCollisionDirection(SmartRect OtherObject)
     sf::FloatRect ObjectFloatRect = getGlobalBounds();
     sf::FloatRect PseudoLine;
 
-    if(MovingDirection != Directions::Stop)
-        return MovingDirection;
-
     if(OtherObject.MovingDirection == Directions::Up)
     {
         // Up
@@ -44,7 +41,7 @@ sf::Vector2f SmartRect::getCollisionDirection(SmartRect OtherObject)
         if(ObjectFloatRect.intersects(PseudoLine))
             return Directions::Left;
     }
-    return Directions::Stop;
+    return MovingDirection;
 }
 
 bool SmartRect::CheckCollision(sf::FloatRect OtherObjectFloatRect)

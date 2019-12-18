@@ -37,8 +37,8 @@ int main()
         Player.Update(DeltaTime);
         //Cage.moveRect(DeltaTime, SmartRect::Directions::Up, 0.1f);
         Player.EntityRect.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
-        //Player.EntityRect.CheckCollision(Cage, SmartRect::CollisionTypes::Outwards);
-        Cage.CheckCollision(Player.EntityRect, SmartRect::CollisionTypes::Outwards);
+        Player.EntityRect.CheckCollision(Cage, SmartRect::CollisionTypes::Outwards);
+        //Cage.CheckCollision(Player.EntityRect, SmartRect::CollisionTypes::Outwards);
         Cage.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
         Player.UpdateCamera();
         AppWindow.setView(Player.getPlayerCamera());
