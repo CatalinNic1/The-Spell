@@ -1,13 +1,13 @@
 #include "Camera.hpp"
+#include "../../CentralStuff/TypeDefs.hpp"
 
 void Camera::setCameraSize(sf::Vector2f NewSize)
 {
-    const sf::Vector2f defaultSize{960.f, 540.f};
-    float scaleFactor = 1;
-    while(NewSize.x / scaleFactor > defaultSize.x || NewSize.y / scaleFactor > defaultSize.y)
-        scaleFactor++;
-    setSize(NewSize.x / scaleFactor, NewSize.y / scaleFactor);
-    CameraSize = {NewSize.x / scaleFactor, NewSize.y / scaleFactor};
+    float ScaleFactor = 1;
+    while(NewSize.x / ScaleFactor > DefaultSize.x || NewSize.y / ScaleFactor > DefaultSize.y)
+        ScaleFactor++;
+    setSize(NewSize.x / ScaleFactor, NewSize.y / ScaleFactor);
+    CameraSize = {NewSize.x / ScaleFactor, NewSize.y / ScaleFactor};
 }
 
 void Camera::UpdateCamera(sf::FloatRect EntityCenter)

@@ -1,8 +1,9 @@
-#include "BigRect.hpp"
-#include "../CentralStuff/GUIWrapper.hpp"
 #include <iostream>
+#include <SFML/Graphics/RenderTarget.hpp>
 
-void BigRect::loadFromFile(std::string fileName)
+#include "BigRect.hpp"
+
+bool BigRect::loadFromFile(const std::string& fileName)
 {
     const uint maxSize = sf::Texture::getMaximumSize();
     
@@ -15,23 +16,32 @@ void BigRect::loadFromFile(std::string fileName)
         {
             std::pair< sf::RectangleShape, std::shared_ptr< sf::Texture > > Rect;
 
-            Rect.second = ResourceManager::Acquire(fileName, sf::IntRect(static_cast<int>(x), 
-            static_cast<int>(y), static_cast<int>(maxSize), static_cast<int>(maxSize)));
-
-            Rect.first.setPosition(static_cast<float>(x), static_cast<float>(y));  
-            Rect.first.setSize(static_cast<sf::Vector2f>(Rect.second->getSize()));
+            try
+            {
+                Rect.second = ResourceManager::Acquire(fileName, sf::IntRect(static_cast< int >(x), 
+                static_cast< int >(y), static_cast< int >(maxSize), static_cast< int >(maxSize)));
+            }
+            catch(const std::exception& Exception)
+            {
+                std::cerr << Exception.what() << "\n";
+                return false;
+            }
+            
+            Rect.first.setPosition(static_cast< float >(x), static_cast< float >(y));  
+            Rect.first.setSize(static_cast< sf::Vector2f >(Rect.second->getSize()));
             Rect.first.setTexture(Rect.second.get());
 
             BigRects.emplace_back(Rect);
         }
+    return true;
 }
-void BigRect::draw()
+void BigRect::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    for(std::pair< sf::RectangleShape, std::shared_ptr< sf::Texture > > Rect : BigRects)
-        AppWindow.draw(Rect.first);
+    for(auto& Rect : BigRects)
+        target.draw(Rect.first, states);
 }
 sf::Vector2f BigRect::getSize()
 {
-    return static_cast<sf::Vector2f>(imageSize);
+    return static_cast< sf::Vector2f >(imageSize);
     std::cout << "Harta: " << imageSize.x << " " << imageSize.y << "/n";
 }

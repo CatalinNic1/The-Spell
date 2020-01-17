@@ -2,7 +2,10 @@
 #include <iostream>
 
 Player::Player(sf::Vector2f Position, sf::Vector2f Size, std::string TextureFileName): 
-    Entity(Position, Size, TextureFileName) {}
+    Entity(Position, Size) 
+{
+    initEntityAnim(TextureFileName);
+}
 
 void Player::Update(float DeltaTime)
 {

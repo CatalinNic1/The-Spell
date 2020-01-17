@@ -1,12 +1,20 @@
+#include <iostream>
+
 #include "Entity.hpp"
 
-Entity::Entity(sf::Vector2f Position, sf::Vector2f Size, std::string TextureFileName)
+Entity::Entity(sf::Vector2f Position, sf::Vector2f Size)
 {
     EntityRect.setPosition(Position);
     EntityRect.setSize(Size);
-    EntityTexture = ResourceManager::Acquire(TextureFileName);
-    EntityRect.setTexture(EntityTexture.get());
-    EntityAnimation.setFrameLimit(static_cast<float>(EntityTexture->getSize().x), static_cast<int>(Size.x));
+    EntityAnimation.AnimTexture = nullptr;
+}
+
+void Entity::initEntityAnim(const std::string& TextureFileName)
+{
+    EntityAnimation.AnimTexture = ResourceManager::Acquire(TextureFileName); 
+    EntityRect.setTexture(EntityAnimation.AnimTexture.get());
+    
+    EntityAnimation.setFrameLimit(TextureFileName, static_cast<int>(EntityRect.getSize().x));
 }
 
 void Entity::moveEntity(float DeltaTime, sf::Vector2f Direction)

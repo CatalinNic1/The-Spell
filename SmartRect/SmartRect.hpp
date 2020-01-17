@@ -5,10 +5,8 @@
 class SmartRect : public sf::RectangleShape
 {
 private:
-    // Self-explanatory
-    const float MovingSpeed = 450.f;
     //
-    float PseudoLineThickness = 2.f;
+    static inline float PseudoLineThickness = 2.f;
     // Used for defining directions for collision instead of using magic numbers
     struct Axis
     {
@@ -17,7 +15,7 @@ private:
         static inline const sf::Vector2f Horizontal = {1.f, 0.f};
     };
     // Used in collisions
-    sf::Vector2f MovingDirection = {0.f, 0.f};
+    sf::Vector2f MovingDirection = Axis::None;
     ///
     /// @brief This is where collision is check, but inwards
     ///
@@ -66,6 +64,8 @@ public:
         Inwards,
         Outwards
     };
+    //
+    sf::Vector2f FacingDirection = Directions::Down;
     ///
     /// @brief I think this is self-explanatory
     ///

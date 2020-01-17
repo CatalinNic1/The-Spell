@@ -24,15 +24,17 @@ protected:
     /// @param Action - Predefined action or direction 
     ///
     void EntityAnimate(Actions Action);
+    ///
+    ///
+    ///
+    void initEntityAnim(const std::string& TextureFileName);
 private:
     // Variable used for animating an entity movement or action
     Animation EntityAnimation;
-    // Pointer to texture of an Entity in order to reduce resource usage
-    std::shared_ptr< sf::Texture > EntityTexture;
 public:
     // Initializer construct
-    Entity(sf::Vector2f Position, sf::Vector2f Size, std::string TextureFileName);
+    Entity(sf::Vector2f Position, sf::Vector2f Size);
     // Internal variable for moving, drawing and collinding entity.
     // Well the Entity itself is there, but not the logic
-   SmartRect EntityRect;
+    SmartRect EntityRect;
 };

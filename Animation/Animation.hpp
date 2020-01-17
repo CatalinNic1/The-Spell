@@ -1,7 +1,9 @@
 #pragma once
 
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <memory>
 
+//
 enum class Actions
 {
     None = -1,
@@ -18,10 +20,25 @@ enum class Actions
 class Animation
 {
 private:
-    int FrameLimit;
+    //
+    int FrameLimit = 0;
+    //
     int CurrentFrame = 0;
+    //
     Actions CurrentAction = Actions::MoveDown;
+    //
+    bool NeedsToLoad = false;
+    //
+    std::string FileName;
 public:
-    void setFrameLimit(float TextureWidth, int HorizontalFrameNumber);
+    //
+    std::shared_ptr< sf::Texture > AnimTexture;
+    ///
+    ///
+    ///
+    void setFrameLimit(const std::string& TextureFileName, int HorizontalFrameNumber);
+    ///
+    ///
+    ///
     void Animate(sf::RectangleShape& EntityRect, Actions Action);
 };
