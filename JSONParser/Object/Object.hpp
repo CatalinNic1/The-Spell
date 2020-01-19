@@ -3,46 +3,48 @@
 #include <unordered_map>
 #include <vector>
 
+#include "../Core/Core.hpp"
+
 namespace JSON
 {
     class Object
     {
     private:
         //
-        const std::string Type;
+        std::string Type = "none";
         //
-        void* Value;
+        void* Value = nullptr;
         //
-        std::unordered_map< const std::string&, Object > Values;
+        std::unordered_map< std::string, Object > Values;
         ///
         ///
         ///
-        const int CastToInt(Object& Obj);
+        const int CastToInt(JSON::Object& Obj);
         ///
         ///
         ///
-        const float CastToFloat(Object& Obj);
+        const float CastToFloat(JSON::Object& Obj);
         ///
         ///
         ///
-        const bool CastToBool(Object& Obj);
+        const bool CastToBool(JSON::Object& Obj);
         ///
         ///
         ///
-        const std::string& CastToString(Object& Obj);
+        const std::string& CastToString(JSON::Object& Obj);
         ///
         ///
         ///
-        const Object& CastToObject(Object& Obj);
+        const JSON::Object& CastToObject(JSON::Object& Obj);
         ///
         ///
         ///
-        std::nullptr_t CastToNull(Object& Obj);
+        std::nullptr_t CastToNull(JSON::Object& Obj);
         ///
         ///
         ///
         template< typename Value >
-        std::vector< Value >& CastToArray(Object& Obj);
+        std::vector< Value >& CastToArray(JSON::Object& Obj);
     public:
         ///
         ///
@@ -52,7 +54,9 @@ namespace JSON
         ///
         ///
         ///
-        template< typename T >
-        void add(const std::string& Key, T&& Value);
+        void add(const std::string& Key, const JSON::Core::Stream& Stream);
+        ///
+        ///
+        ///
     };
 }

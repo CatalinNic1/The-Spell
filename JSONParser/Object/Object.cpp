@@ -3,30 +3,46 @@
 
 #include "Object.hpp"
 
-template< typename T >
-void JSON::Object::add(const std::string& Key, T&& Value)
+void JSON::Object::add(const std::string& Key, const JSON::Core::Stream& stream)
 {
     Object Obj;
-    
-    Obj.Value = static_cast< void* >(&Value);
-    Obj.Type = typeid(T).name;
-    
     Values.insert({Key, Obj});
 }
 
-const int JSON::Object::CastToInt(Object& Obj)
+const int JSON::Object::CastToInt(JSON::Object& Obj)
 {
     return *static_cast< int* >(Obj.Value);
 }
 
-const float JSON::Object::CastToFloat(Object& Obj)
+const float JSON::Object::CastToFloat(JSON::Object& Obj)
 {
     return *static_cast< float* >(Obj.Value);
 }
 
-const bool JSON::Object::CastToBool(Object& Obj)
+const bool JSON::Object::CastToBool(JSON::Object& Obj)
 {
     return *static_cast< bool* >(Obj.Value);
+}
+
+const std::string& JSON::Object::CastToString(JSON::Object& Obj)
+{
+    return *static_cast< std::string* >(Obj.Value);
+}
+
+const JSON::Object& JSON::Object::CastToObject(JSON::Object& Obj)
+{
+    return *static_cast< Object* >(Obj.Value);
+}
+
+std::nullptr_t JSON::Object::CastToNull(JSON::Object& Obj)
+{
+    return *static_cast< std::nullptr_t* >(Obj.Value);
+}
+
+template< typename Value >
+std::vector< Value >& JSON::Object::CastToArray(JSON::Object& Obj)
+{
+    return *static_cast< std::vector< Value >* >(Obj.Value);
 }
 
 template< typename Value >
