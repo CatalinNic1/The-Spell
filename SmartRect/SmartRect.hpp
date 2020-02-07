@@ -5,7 +5,7 @@
 class SmartRect : public sf::RectangleShape
 {
 private:
-    //
+    // Used for Collision logic
     static inline float PseudoLineThickness = 2.f;
     // Used for defining directions for collision instead of using magic numbers
     struct Axis
@@ -64,7 +64,7 @@ public:
         Inwards,
         Outwards
     };
-    //
+    // This can be used lately for projectiles and other stuff
     sf::Vector2f FacingDirection = Directions::Down;
     ///
     /// @brief I think this is self-explanatory

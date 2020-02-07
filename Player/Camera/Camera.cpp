@@ -1,5 +1,6 @@
 #include "Camera.hpp"
 #include "../../CentralStuff/TypeDefs.hpp"
+#include "../../CentralStuff/CoreFunctions.hpp"
 
 void Camera::setCameraSize(sf::Vector2f NewSize)
 {
@@ -16,7 +17,7 @@ void Camera::UpdateCamera(sf::FloatRect EntityCenter)
     sf::Vector2f Direction = getCameraDirection();
     sf::Vector2f PositionDiff = PlayerCentralPosition - getCenter();
     
-    move({Direction.x * PositionDiff.x, Direction.y * PositionDiff.y});
+    move(Direction * PositionDiff);
     Collisions CollisionType = getCollisionType();
     correctCamera(CollisionType);
 }
@@ -40,16 +41,17 @@ void Camera::correctCamera(Camera::Collisions CollisionType)
 sf::Vector2f Camera::getCameraDirection()
 {
     sf::Vector2f CameraPosition = getCenter();
+    sf::Vector2f Direction = Axis::None;
+
     if(PlayerCentralPosition.y < CameraPosition.y && CameraPosition.y - CameraSize.y / 2.f > 0.f)
-        return Axis::Vertical;
-    else if(PlayerCentralPosition.y > CameraPosition.y && CameraPosition.y + CameraSize.y / 2.f < LevelLimits.y)
-        return Axis::Vertical;
-    else if(PlayerCentralPosition.x < CameraPosition.x && CameraPosition.x - CameraSize.x / 2.f > 0.f)
-        return Axis::Horizontal;
-    else if(PlayerCentralPosition.x > CameraPosition.x && CameraPosition.x + CameraSize.x / 2.f < LevelLimits.x)
-        return Axis::Horizontal;
-    else
-        return Axis::None;
+        Direction += Axis::Vertical;
+    if(PlayerCentralPosition.y > CameraPosition.y && CameraPosition.y + CameraSize.y / 2.f < LevelLimits.y)
+        Direction += Axis::Vertical;
+    if(PlayerCentralPosition.x < CameraPosition.x && CameraPosition.x - CameraSize.x / 2.f > 0.f)
+        Direction += Axis::Horizontal;
+    if(PlayerCentralPosition.x > CameraPosition.x && CameraPosition.x + CameraSize.x / 2.f < LevelLimits.x)
+        Direction += Axis::Horizontal;
+    return Direction;
 }
 
 Camera::Collisions Camera::getCollisionType()
