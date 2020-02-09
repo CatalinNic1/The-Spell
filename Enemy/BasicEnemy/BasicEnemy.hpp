@@ -2,22 +2,18 @@
 
 #include "../Core/Enemy.hpp"
 
-class BasicEnemy : Enemy
+class BasicEnemy : public Enemy
 {
 private:
     //
-    enum Directions
-    {
-        None,
-        Up,
-        Down,
-        Left,
-        Right
-    };
-    //
     float Distance = 0.f;
     //
-    int Direction = Directions::None;
+    int Direction = static_cast< int >(Actions::None);
+protected:
+    ///
+    ///
+    ///
+    virtual std::pair< sf::Vector2f, Actions > getAction() override;
 public:
     ///
     ///
@@ -26,5 +22,5 @@ public:
     ///
     ///
     ///
-    virtual void move(float DeltaTime, float SpeedFactor = 1.f) override;
+    virtual void Update(float DeltaTime) override;
 };

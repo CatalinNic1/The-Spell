@@ -6,6 +6,11 @@ class Enemy : public Entity
 {
 private:
     /* data */
+protected:
+    ///
+    ///
+    ///
+    virtual std::pair< sf::Vector2f, Actions > getAction() = 0;
 public:
     ///
     ///
@@ -14,5 +19,5 @@ public:
     ///
     ///
     ///
-    virtual void move(float DeltaTime, float SpeedFactor = 1.f) = 0;
+    virtual void Update(float DeltaTime) = 0;
 };
