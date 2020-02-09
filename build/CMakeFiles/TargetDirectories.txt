@@ -1,0 +1,3 @@
+/home/catalin/Desktop/The-Spell/build/CMakeFiles/rebuild_cache.dir
+/home/catalin/Desktop/The-Spell/build/CMakeFiles/The-Spell.dir
+/home/catalin/Desktop/The-Spell/build/CMakeFiles/edit_cache.dir
