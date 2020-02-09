@@ -6,7 +6,18 @@ class BasicEnemy : Enemy
 {
 private:
     //
-    static const int maxDirections = 4;
+    enum Directions
+    {
+        None,
+        Up,
+        Down,
+        Left,
+        Right
+    };
+    //
+    float Distance = 0.f;
+    //
+    int Direction = Directions::None;
 public:
     ///
     ///
@@ -15,5 +26,5 @@ public:
     ///
     ///
     ///
-    virtual void move(float DeltaTime) override;
+    virtual void move(float DeltaTime, float SpeedFactor = 1.f) override;
 };

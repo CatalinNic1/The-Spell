@@ -1,33 +1,35 @@
 #include <random>
+#include "TypeDefs.hpp"
 
 class RandomIntegral
 {
 private:
     //
-    static inline std::uniform_int_distribution< std::mt19937_64::result_type > randomDistribution;
-    //
-    static inline std::mt19937_64 randomEngine;
+    static inline std::mt19937 randomEngine;
 public:
     ///
     ///
     ///
     static int getRandom(int Min, int Max)
     {
-        return randomDistribution(randomEngine) % (Max + 1 - Min) + Min;
+        std::uniform_int_distribution< int > randomDistribution(Min, Max);
+        return randomDistribution(randomEngine); 
     }
     ///
     ///
     ///
     static int getRandom(int Max)
     {
-        return randomDistribution(randomEngine) % Max;
+        std::uniform_int_distribution< int > randomDistribution(0, Max);
+        return randomDistribution(randomEngine); 
     }
     ///
     ///
     ///
     static int getRandom()
     {
-        return randomDistribution(randomEngine);
+        std::uniform_int_distribution< int > randomDistribution;
+        return randomDistribution(randomEngine); 
     }
 };
 
@@ -36,15 +38,30 @@ class RandomReal
 {
 private:
     //
-    static inline std::uniform_int_distribution< std::mt19937_64::result_type > randomDistribution;
-    //
-    static inline std::mt19937_64 randomEngine;
+    static inline std::mt19937 randomEngine;
 public:
+    ///
+    ///
+    ///
+    static float getRandom(float Min, float Max)
+    {
+        std::uniform_real_distribution< float > randomDistribution(Min, Max);
+        return randomDistribution(randomEngine); 
+    }
+    ///
+    ///
+    ///
+    static float getRandom(float Max)
+    {
+        std::uniform_real_distribution< float > randomDistribution(0.f, Max);
+        return randomDistribution(randomEngine); 
+    }
     ///
     ///
     ///
     static float getRandom()
     {
-        return static_cast< float >(randomDistribution(randomEngine)) / static_cast< float >(std::numeric_limits< uint_fast64_t >::max());
+        std::uniform_real_distribution< float > randomDistribution;
+        return randomDistribution(randomEngine); 
     }
 };

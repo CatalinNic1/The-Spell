@@ -1,1 +1,0 @@
-NOTE!! This is a dynamic compilled binary so It will need The SFML, TGUI and C++ .so-s 

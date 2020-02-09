@@ -3,6 +3,8 @@
 // Used for defining the uint type, typically define for Linux already (Cross compilling reasons)
 typedef unsigned int uint;
 //
+typedef unsigned long ulong;
+//
 #define TextureMinSize 512u
 // Self-explanatory
 #define MovingSpeed 300.f

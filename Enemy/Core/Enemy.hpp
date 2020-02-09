@@ -14,5 +14,5 @@ public:
     ///
     ///
     ///
-    virtual void move(float DeltaTime) = 0;
+    virtual void move(float DeltaTime, float SpeedFactor = 1.f) = 0;
 };
