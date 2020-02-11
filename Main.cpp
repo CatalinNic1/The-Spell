@@ -20,7 +20,13 @@ int main()
     BigRect Map;
     Map.loadFromFile("Resources/Thevillage.png");
 
-    BasicEnemy E({600, 600}, {24, 32}, "Resources/BasicEnemy.png");
+    std::vector< BasicEnemy > Enemies;
+
+    for(int i = 1; i <= 15; i++)
+    {
+        BasicEnemy E({600, 600}, {24, 32}, "Resources/BasicEnemy.png");
+        Enemies.emplace_back(E);
+    }
 
     while(AppWindow.isOpen())
     {
@@ -31,41 +37,31 @@ int main()
             else if(AppEvent.type == sf::Event::LostFocus)
                 continue;
             else if(AppEvent.type == sf::Event::Resized)
-                Player.setCameraSize({static_cast<float>(AppEvent.size.width),
-                static_cast<float>(AppEvent.size.height)});
+                Player.setCameraSize({static_cast< float >(AppEvent.size.width),
+                static_cast< float >(AppEvent.size.height)});
         }
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-            AppWindow.close();
         AppWindow.clear();
         DeltaTime = AppClock.restart().asSeconds();
         Player.Update(DeltaTime);
-        Cage.moveRect(DeltaTime, SmartRect::Directions::Up, 0.05f);
-        E.Update(DeltaTime);
 
-        {
-            Player.EntityRect.CheckCollision(Cage, SmartRect::CollisionTypes::Outwards);
-            Player.EntityRect.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
-            Cage.CheckCollision(Player.EntityRect, SmartRect::CollisionTypes::Outwards);
-            Cage.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
-        }
+        for(BasicEnemy& E : Enemies)
+            E.Update(DeltaTime);
+
+        for(BasicEnemy& E : Enemies)
         {
             Player.EntityRect.CheckCollision(E.EntityRect, SmartRect::CollisionTypes::Outwards);
             Player.EntityRect.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
-            E.EntityRect.CheckCollision(Player.EntityRect, SmartRect::CollisionTypes::Outwards);
+            //E.EntityRect.CheckCollision(Player.EntityRect, SmartRect::CollisionTypes::Outwards);
             E.EntityRect.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
-        }
-        {
-            E.EntityRect.CheckCollision(Cage, SmartRect::CollisionTypes::Outwards);
-            E.EntityRect.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
-            Cage.CheckCollision(E.EntityRect, SmartRect::CollisionTypes::Outwards);
-            Cage.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
         }
 
         Player.UpdateCamera();
         AppWindow.setView(Player.getPlayerCamera());
         AppWindow.draw(Map);
-        AppWindow.draw(Cage);
-        AppWindow.draw(E.EntityRect);
+
+        for(BasicEnemy& E : Enemies)
+            AppWindow.draw(E.EntityRect);
+
         AppWindow.draw(Player.EntityRect);
         AppWindow.display();
     }
