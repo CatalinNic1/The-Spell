@@ -1,3 +1,26 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1132aad00b98988313eed0c75dc2ac275474c6193cd851b8b6d9b2a47fbcdcaa
-size 562
+#pragma once
+
+#include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Graphics/Texture.hpp>
+
+#include "../ResourceManager/ResourceManager.hpp"
+
+class BigRect : public sf::Drawable 
+{
+public:
+    ///
+    ///
+    ///
+    bool loadFromFile(const std::string& fileName);
+    //
+    sf::Vector2f getSize();
+private:
+    ///
+    ///
+    ///
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+    //
+    class std::vector< std::pair< sf::RectangleShape, std::shared_ptr< sf::Texture > > > BigRects;
+    //
+    sf::Vector2u imageSize;
+};

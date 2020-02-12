@@ -1,3 +1,41 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:bf26a38c95e8c2f4d5ce949a12d044525b91d33d06f060f86b96103a711a8064
-size 829
+#include "EventHandler.hpp"
+
+bool getInput::OnlyMovingUp()
+{
+    return MovingUp() && !MovingDown() && !MovingLeft() && !MovingRight();
+}
+
+bool getInput::OnlyMovingDown()
+{
+    return MovingDown() && !MovingUp() && !MovingLeft() && !MovingRight();
+}
+
+bool getInput::OnlyMovingLeft()
+{
+    return MovingLeft() && !MovingUp() && !MovingDown() && !MovingRight();
+}
+
+bool getInput::OnlyMovingRight()
+{
+    return MovingRight() && !MovingUp() && !MovingDown() && !MovingLeft();
+}
+
+bool getInput::MovingUp()
+{
+    return sf::Keyboard::isKeyPressed(sf::Keyboard::W);
+}
+
+bool getInput::MovingDown()
+{
+    return sf::Keyboard::isKeyPressed(sf::Keyboard::S);
+}
+
+bool getInput::MovingLeft()
+{
+    return sf::Keyboard::isKeyPressed(sf::Keyboard::A);
+}
+
+bool getInput::MovingRight()
+{
+    return sf::Keyboard::isKeyPressed(sf::Keyboard::D);
+}

@@ -1,3 +1,47 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:53a2626fc92d80a599aa970ac5f98c18b898f60c629fc92680d9174d8775f792
-size 1539
+#include <iostream>
+#include <SFML/Graphics/RenderTarget.hpp>
+
+#include "BigRect.hpp"
+
+bool BigRect::loadFromFile(const std::string& fileName)
+{
+    const uint maxSize = sf::Texture::getMaximumSize();
+    
+        sf::Image BigImage;
+    BigImage.loadFromFile(fileName);
+    imageSize = BigImage.getSize();
+
+    for(uint x = 0u; x < imageSize.x; x += maxSize)
+        for(uint y = 0u; y < imageSize.y; y += maxSize)
+        {
+            std::pair< sf::RectangleShape, std::shared_ptr< sf::Texture > > Rect;
+
+            try
+            {
+                Rect.second = ResourceManager::Acquire(fileName, sf::IntRect(static_cast< int >(x), 
+                static_cast< int >(y), static_cast< int >(maxSize), static_cast< int >(maxSize)));
+            }
+            catch(const std::exception& Exception)
+            {
+                std::cerr << Exception.what() << "\n";
+                return false;
+            }
+            
+            Rect.first.setPosition(static_cast< float >(x), static_cast< float >(y));  
+            Rect.first.setSize(static_cast< sf::Vector2f >(Rect.second->getSize()));
+            Rect.first.setTexture(Rect.second.get());
+
+            BigRects.emplace_back(Rect);
+        }
+    return true;
+}
+void BigRect::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+    for(auto& Rect : BigRects)
+        target.draw(Rect.first, states);
+}
+sf::Vector2f BigRect::getSize()
+{
+    return static_cast< sf::Vector2f >(imageSize);
+    std::cout << "Harta: " << imageSize.x << " " << imageSize.y << "/n";
+}

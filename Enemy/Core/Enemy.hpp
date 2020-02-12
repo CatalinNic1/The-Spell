@@ -1,3 +1,23 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:ec3cb7cc517f45b1efabac55e7ee325aae38130f1c9b481956417ebfda330430
-size 389
+#pragma once
+
+#include "../../Entity/Entity.hpp"
+
+class Enemy : public Entity
+{
+private:
+    /* data */
+protected:
+    ///
+    ///
+    ///
+    virtual std::pair< sf::Vector2f, Actions > getAction() = 0;
+public:
+    ///
+    ///
+    ///
+    Enemy(sf::Vector2f Position, sf::Vector2f Size, std::string TextureFileName);
+    ///
+    ///
+    ///
+    virtual void Update(float DeltaTime) = 0;
+};
