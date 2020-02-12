@@ -1,36 +1,3 @@
-#pragma once
-
-#include <TGUI/TGUI.hpp>
-#include <vector>
-
-// This class will be used to store
-// componets like: RenderWindow and GUI class
-class AppCore
-{
-public:
-    static inline sf::RenderWindow AppWindow;
-    static inline tgui::Gui AppGui;
-    static inline sf::Clock AppClock;
-    static inline sf::Event AppEvent;
-    static inline float DeltaTime;
-};
-
-#define AppWindow AppCore::AppWindow
-#define AppClock AppCore::AppClock
-#define AppEvent AppCore::AppEvent
-#define AppGui AppCore::AppGui
-#define DeltaTime AppCore::DeltaTime
-
-void SleepWindow();
-
-void SleepWindow()
-{
-    while(AppWindow.isOpen())
-    {
-        while(AppWindow.pollEvent(AppEvent))
-        {
-            if(AppEvent.type == sf::Event::GainedFocus)
-                return;
-        }
-    }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:a989e7f565962d60e681075a0749ee9e331c7cf23d15be6338a41c108aec11cb
+size 767

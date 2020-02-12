@@ -1,18 +1,3 @@
-#pragma once
-
-// Used for defining the uint type, typically define for Linux already (Cross compilling reasons)
-typedef unsigned int uint;
-//
-typedef unsigned long ulong;
-//
-#define TextureMinSize 512u
-// Self-explanatory
-#define MovingSpeed 300.f
-//
-#define TileSize sf::Vector2f(32.f, 32.f)
-//
-#define DefaultSize sf::Vector2f(480.f, 270.f)
-//
-#define PseudoLineMultiplier 2.f
-//
-#define DifferenceOffset 1.1f
+version https://git-lfs.github.com/spec/v1
+oid sha256:8afdfce624c251db63e0befeb280366336530d44250b83711455e35d54cd0b7c
+size 411

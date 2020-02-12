@@ -1,16 +1,3 @@
-#pragma once
-
-#include <array>
-
-#include "../Tile/Tile.hpp"
-
-#define ChunkLength 8
-
-class MapChunk
-{
-private:
-    //
-    class std::array< std::array< MapTile, ChunkLength >, ChunkLength > Chunk;
-public:
-
-};
+version https://git-lfs.github.com/spec/v1
+oid sha256:d378deb2f19a8236d88f737b12678c43a40ce272c7d805969d123de832ebc70a
+size 207
