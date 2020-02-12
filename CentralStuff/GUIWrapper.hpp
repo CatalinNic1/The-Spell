@@ -20,3 +20,17 @@ public:
 #define AppEvent AppCore::AppEvent
 #define AppGui AppCore::AppGui
 #define DeltaTime AppCore::DeltaTime
+
+void SleepWindow();
+
+void SleepWindow()
+{
+    while(AppWindow.isOpen())
+    {
+        while(AppWindow.pollEvent(AppEvent))
+        {
+            if(AppEvent.type == sf::Event::GainedFocus)
+                return;
+        }
+    }
+}

@@ -35,7 +35,7 @@ int main()
             if(AppEvent.type == sf::Event::Closed)
                 AppWindow.close();
             else if(AppEvent.type == sf::Event::LostFocus)
-                continue;
+                SleepWindow();
             else if(AppEvent.type == sf::Event::Resized)
                 Player.setCameraSize({static_cast< float >(AppEvent.size.width),
                 static_cast< float >(AppEvent.size.height)});
