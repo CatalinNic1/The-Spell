@@ -1,7 +1,8 @@
 #pragma once
 
-#include <TGUI/TGUI.hpp>
-#include <vector>
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/System/Clock.hpp>
+#include <SFML/Window/Event.hpp>
 
 // This class will be used to store
 // componets like: RenderWindow and GUI class
@@ -9,18 +10,23 @@ class AppCore
 {
 public:
     static inline sf::RenderWindow AppWindow;
-    static inline tgui::Gui AppGui;
     static inline sf::Clock AppClock;
     static inline sf::Event AppEvent;
     static inline float DeltaTime;
 };
 
+// sf::RenderWindow global interface
 #define AppWindow AppCore::AppWindow
+// sf::Clock global interface
 #define AppClock AppCore::AppClock
+// sf::Event global interface
 #define AppEvent AppCore::AppEvent
-#define AppGui AppCore::AppGui
+// Global interface for thie between frames
 #define DeltaTime AppCore::DeltaTime
 
+///
+/// @brief Sleep function when unfocused 
+///
 void SleepWindow();
 
 void SleepWindow()

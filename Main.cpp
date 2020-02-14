@@ -1,6 +1,6 @@
 #include "Player/Player.hpp"
 #include "Enemy/BasicEnemy/BasicEnemy.hpp"
-#include "CentralStuff/GUIWrapper.hpp"
+#include "CentralStuff/GlobalVariables.hpp"
 #include "BigRect/BigRect.hpp"
 
 int main()

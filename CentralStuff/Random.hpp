@@ -6,11 +6,17 @@
 class RandomIntegral
 {
 private:
-    //
+    // Random generator engine (32-bit)
     static inline std::mt19937 randomEngine;
 public:
     ///
+    /// @brief Generates a number between a Min and a Max, so, a range-based generation
     ///
+    /// @param Min - I don't know what to put here (I'm open to sugestions in regards)
+    ///
+    /// @param Max - Same as Min
+    ///
+    /// @return A random generated int
     ///
     static int getRandom(int Min, int Max)
     {
@@ -18,7 +24,11 @@ public:
         return randomDistribution(randomEngine); 
     }
     ///
+    /// @brief Generates a number between 0 and Max, so, a range-based generation (I suggest to not put negative numbers)
     ///
+    /// @param Max - I don't know what to put here (I'm open to sugestions in regards)
+    ///
+    /// @return A random generated int
     ///
     static int getRandom(int Max)
     {
@@ -26,7 +36,9 @@ public:
         return randomDistribution(randomEngine); 
     }
     ///
+    /// @brief Idk, generates a random number
     ///
+    /// @return A random number
     ///
     static int getRandom()
     {
@@ -39,11 +51,17 @@ public:
 class RandomReal
 {
 private:
-    //
+    // Random generator engine (32-bit)
     static inline std::mt19937 randomEngine;
 public:
     ///
+    /// @brief Generates a number between a Min and a Max, so, a range-based generation
     ///
+    /// @param Min - I don't know what to put here (I'm open to sugestions in regards)
+    ///
+    /// @param Max - Same as Min
+    ///
+    /// @return A random generated int
     ///
     static float getRandom(float Min, float Max)
     {
@@ -51,7 +69,11 @@ public:
         return randomDistribution(randomEngine); 
     }
     ///
+    /// @brief Generates a number between 0 and Max, so, a range-based generation (I suggest to not put negative numbers)
     ///
+    /// @param Max - I don't know what to put here (I'm open to sugestions in regards)
+    ///
+    /// @return A random generated int
     ///
     static float getRandom(float Max)
     {
@@ -59,7 +81,9 @@ public:
         return randomDistribution(randomEngine); 
     }
     ///
+    /// @brief Idk, generates a random number
     ///
+    /// @return A random number
     ///
     static float getRandom()
     {
@@ -73,11 +97,17 @@ public:
 class RandomIntegral
 {
 private:
-    //
+    // Random generator engine (64-bit)
     static inline std::mt19937_64 randomEngine;
 public:
     ///
+    /// @brief Generates a number between a Min and a Max, so, a range-based generation
     ///
+    /// @param Min - I don't know what to put here (I'm open to sugestions in regards)
+    ///
+    /// @param Max - Same as Min
+    ///
+    /// @return A random generated int
     ///
     static int getRandom(int Min, int Max)
     {
@@ -85,7 +115,11 @@ public:
         return randomDistribution(randomEngine); 
     }
     ///
+    /// @brief Generates a number between 0 and Max, so, a range-based generation (I suggest to not put negative numbers)
     ///
+    /// @param Max - I don't know what to put here (I'm open to sugestions in regards)
+    ///
+    /// @return A random generated int
     ///
     static int getRandom(int Max)
     {
@@ -93,7 +127,9 @@ public:
         return randomDistribution(randomEngine); 
     }
     ///
+    /// @brief Idk, generates a random number
     ///
+    /// @return A random number
     ///
     static int getRandom()
     {
@@ -106,11 +142,17 @@ public:
 class RandomReal
 {
 private:
-    //
+    // Random generator engine (64-bit)
     static inline std::mt19937_64 randomEngine;
 public:
     ///
+    /// @brief Generates a number between a Min and a Max, so, a range-based generation
     ///
+    /// @param Min - I don't know what to put here (I'm open to sugestions in regards)
+    ///
+    /// @param Max - Same as Min
+    ///
+    /// @return A random generated int
     ///
     static float getRandom(float Min, float Max)
     {
@@ -118,7 +160,11 @@ public:
         return randomDistribution(randomEngine); 
     }
     ///
+    /// @brief Generates a number between 0 and Max, so, a range-based generation (I suggest to not put negative numbers)
     ///
+    /// @param Max - I don't know what to put here (I'm open to sugestions in regards)
+    ///
+    /// @return A random generated int
     ///
     static float getRandom(float Max)
     {
@@ -126,7 +172,9 @@ public:
         return randomDistribution(randomEngine); 
     }
     ///
+    /// @brief Idk, generates a random number
     ///
+    /// @return A random number
     ///
     static float getRandom()
     {

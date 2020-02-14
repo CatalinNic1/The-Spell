@@ -1,4 +1,5 @@
 #include <SFML/Graphics/Image.hpp>
+#include <iostream>
 
 #include "Animation.hpp"
 #include "../CentralStuff/TypeDefs.hpp"
@@ -35,15 +36,17 @@ void Animation::Animate(sf::RectangleShape& EntityRect, Actions Action)
     CurrentFrame++;
 }
 
-void Animation::setFrameLimit(const std::string& TextureFileName, int HorizontalFrameNumber)
+void Animation::setFrameLimit(const std::string& TextureFileName, int HorizontalFrameSize)
 {
     sf::Image Im;
     
     Im.loadFromFile(TextureFileName);
     sf::Vector2u TextureSize = Im.getSize();
     
-    FrameLimit = static_cast<int>(TextureSize.x) / HorizontalFrameNumber;
+    FrameLimit = static_cast<int>(TextureSize.x) / HorizontalFrameSize;
     if(TextureSize.x > TextureMinSize || TextureSize.y > TextureMinSize)
+        std::cout << "Warning: Recommended size is exced.\nNote that texture won't be compatible with all GPUs\n";
+    if(TextureSize.x > sf::Texture::getMaximumSize() || TextureSize.y > sf::Texture::getMaximumSize())
     {
         NeedsToLoad = true;
         FileName = TextureFileName;

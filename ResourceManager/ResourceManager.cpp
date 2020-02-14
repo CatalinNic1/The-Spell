@@ -11,7 +11,9 @@ std::shared_ptr< sf::Texture > ResourceManager::Acquire(const std::string& Textu
         TextureKey = getName(TextureFileName) + " " + RectToString(TextureArea);
     else
         TextureKey = getName(TextureFileName);
+        
     TextureMapIter = TextureMap.find(TextureKey);
+
     if(TextureMapIter != TextureMap.end())
         return TextureMapIter->second;
     else
