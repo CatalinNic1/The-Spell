@@ -4,6 +4,15 @@
 
 #include <iostream>
 
+#define TooBigToBeSupported "The image is bigger than the minimal size for all GPUs. \n\
+Consider disabling the mod that you loaded.\n"
+#define TooBigCompToStdSize "Warning: \n\
+The image is bigger than the minimal size for all GPUs. \n\
+Please use TileSets with the maximum resolution of 512x512, \n\
+but if it is an animation, use the Area argument, \n\
+but to be max 512x512. \n\
+To ensure maximum compatibility.\n"
+
 std::shared_ptr< sf::Texture > ResourceManager::Acquire(const std::string& TextureFileName, const sf::IntRect& TextureArea)
 {
     std::string TextureKey;
@@ -37,10 +46,20 @@ void ResourceManager::CheckSize(const std::string& FileName, const sf::IntRect& 
 {
     sf::Image Im;
     Im.loadFromFile(FileName);
-    if((Im.getSize().x > sf::Texture::getMaximumSize() || Im.getSize().y > sf::Texture::getMaximumSize()) && (Area == sf::IntRect() || (static_cast< uint >(Area.width) > sf::Texture::getMaximumSize() || static_cast< uint >(Area.height) > sf::Texture::getMaximumSize())))
-        std::runtime_error("The image is bigger than the minimal size for all GPUs. Consider disabling the mod that you loaded.");
-    if((Im.getSize().x > TextureMinSize || Im.getSize().y > TextureMinSize) && (Area == sf::IntRect()))
-        std::cout << "Warning: The image is bigger than the minimal size for all GPUs. Please use TileSets with the maximum resolution of 512x512, but if it is an animation, use the Area argument, but to be max 512x512. To ensure maximum compatibility.\n";
+    if(Area == sf::IntRect())
+    {
+        if(Im.getSize().x > sf::Texture::getMaximumSize() || Im.getSize().y > sf::Texture::getMaximumSize())
+            std::runtime_error(FileName + ": " + TooBigToBeSupported);
+        else if((Im.getSize().x > TextureMinSize || Im.getSize().y > TextureMinSize))
+            std::cout << FileName + ": " + TooBigCompToStdSize;
+    }
+    else
+    {
+        if(static_cast< uint >(Area.width) > sf::Texture::getMaximumSize() || static_cast< uint >(Area.height) > sf::Texture::getMaximumSize())
+            std::runtime_error(FileName + ": " + TooBigToBeSupported);
+        else if(static_cast< uint >(Area.width) > TextureMinSize || static_cast< uint >(Area.height) > TextureMinSize)
+            std::cout << FileName + ": " + TooBigCompToStdSize;
+    }
 }
 
 void ResourceManager::RemoveOrphans()

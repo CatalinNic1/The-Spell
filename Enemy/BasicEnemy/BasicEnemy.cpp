@@ -3,7 +3,7 @@
 #include "../../CentralStuff/TypeDefs.hpp"
 
 #define DistanceTreshold 128.f
-#define MaxDirections 3.f
+#define MaxActions 3.f
 
 BasicEnemy::BasicEnemy(sf::Vector2f Position, sf::Vector2f Size, std::string TextureFileName)
     : Enemy(Position, Size, TextureFileName)
@@ -21,20 +21,20 @@ std::pair< sf::Vector2f, Actions > BasicEnemy::getAction()
 {
     if(Distance < DistanceTreshold)
     {
-        if(Direction == static_cast< int >(Actions::MoveUp))
+        if(Action == Actions::MoveUp)
             return {SmartRect::Directions::Up, Actions::MoveUp};
-        else if(Direction == static_cast< int >(Actions::MoveDown))
+        else if(Action == Actions::MoveDown)
             return {SmartRect::Directions::Down, Actions::MoveDown};
-        else if(Direction == static_cast< int >(Actions::MoveLeft))
+        else if(Action == Actions::MoveLeft)
             return {SmartRect::Directions::Left, Actions::MoveLeft};
-        else if(Direction == static_cast< int >(Actions::MoveRight))
+        else if(Action == Actions::MoveRight)
             return {SmartRect::Directions::Right, Actions::MoveRight};
         else
             return {SmartRect::Directions::Stop, Actions::None};
     }
     else
     {
-        Direction = RandomIntegral::getRandom(static_cast< int >(Actions::None), MaxDirections);
+        Action = static_cast< Actions >(RandomIntegral::getRandom(static_cast< int >(Actions::None), MaxActions));
         Distance = 0.f;
         return {SmartRect::Directions::Stop, Actions::None};
     }

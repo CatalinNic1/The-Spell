@@ -29,7 +29,14 @@ public:
     static void Clear();
 private:
     ///
+    /// @brief Checks if Texture size is exceeding the recomended size, if it does, it will
+    /// print a warning and if it exceeds the maximum size supported by the gpu it will
+    /// throw an exeption
     ///
+    /// @param FileName - Path to the texture to be verified
+    ///
+    /// @param Area - How much of the texture will be loaded/seen, this parameter will
+    /// be used in size verification process
     ///
     static void CheckSize(const std::string& FileName, const sf::IntRect& Area = sf::IntRect());
     // Where all Textures (smart pointers) will be stored 

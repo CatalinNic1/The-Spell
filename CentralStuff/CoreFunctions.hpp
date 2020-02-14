@@ -36,6 +36,6 @@ sf::Vector2< T > operator*(sf::Vector2< T > Right, sf::Vector2< T > Left)
 ///
 /// @param FileName - This simple to understand, you want more explanation put it yourself
 ///
-/// @return A siring, nothing more harder to understand
+/// @return A string, nothing more harder to understand
 ///
 std::string getName(const std::string& FileName);

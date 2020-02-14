@@ -36,7 +36,7 @@ public:
     ///
     /// @brief Here is where the loading happens and frame limit will be set and
     /// this is where the function will decide if it needs to switch textures or not, 
-    /// that is achived by verifying if the size of the whole texture is exciding the recomended size 
+    /// that is achived by verifying if the size of the whole texture is exceeding the recomended size 
     ///
     /// @param TextureFileName - Path of the image to be loaded
     ///

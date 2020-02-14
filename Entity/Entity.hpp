@@ -25,14 +25,22 @@ protected:
     ///
     void EntityAnimate(Actions Action);
     ///
+    /// @brief Here is where animations will be ititialize by calling Animation::setFrameLimit()
     ///
+    /// @param TextureFileName - Path of the image to be loaded
     ///
     void initEntityAnim(const std::string& TextureFileName);
 private:
     // Variable used for animating an entity movement or action
     Animation EntityAnimation;
 public:
-    // Initializer construct
+    ///
+    /// @brief Initializer construct for entity
+    ///
+    /// @param Position - Where you want the enemy will be initially localized 
+    ///
+    /// @param Size - How big you want the enemy to be in pixel size
+    ///
     Entity(sf::Vector2f Position, sf::Vector2f Size);
     // Internal variable for moving, drawing and collinding entity.
     // Well the Entity itself is there, but not the logic
