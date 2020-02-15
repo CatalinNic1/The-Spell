@@ -34,7 +34,7 @@ std::pair< sf::Vector2f, Actions > BasicEnemy::getAction()
     }
     else
     {
-        Action = static_cast< Actions >(RandomIntegral::getRandom(static_cast< int >(Actions::None), MaxActions));
+        Action = static_cast< Actions >(RandomIntegral::getRandom(MaxActions));
         Distance = 0.f;
         return {SmartRect::Directions::Stop, Actions::None};
     }

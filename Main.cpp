@@ -3,9 +3,13 @@
 #include "CentralStuff/GlobalVariables.hpp"
 #include "BigRect/BigRect.hpp"
 
+#include <SFML/Window/Cursor.hpp>
+
 int main()
 {
-    AppWindow.create(sf::VideoMode(800, 600), "app", sf::Style::Default);
+
+    sf::Cursor;
+    AppWindow.create(sf::VideoMode(800, 600), "app", sf::Style::Fullscreen);
     AppWindow.setVerticalSyncEnabled(true);
 
     Player Player({650, 540}, {24, 32}, "Resources/Player.png");
@@ -51,7 +55,7 @@ int main()
         {
             Player.EntityRect.CheckCollision(E.EntityRect, SmartRect::CollisionTypes::Outwards);
             Player.EntityRect.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
-            //E.EntityRect.CheckCollision(Player.EntityRect, SmartRect::CollisionTypes::Outwards);
+            E.EntityRect.CheckCollision(Player.EntityRect, SmartRect::CollisionTypes::Outwards);
             E.EntityRect.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
         }
 
