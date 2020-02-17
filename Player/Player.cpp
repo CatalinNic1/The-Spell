@@ -43,6 +43,11 @@ sf::View Player::getPlayerCamera()
     return PlayerCamera;
 }
 
+sf::Vector2f Player::getCameraSize()
+{
+    return PlayerCamera.getSize();
+}
+
 void Player::setLevelLimits(sf::Vector2f Limits)
 {
     PlayerCamera.setLevelLimits(Limits);

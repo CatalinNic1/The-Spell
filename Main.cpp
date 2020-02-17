@@ -7,9 +7,7 @@
 
 int main()
 {
-
-    sf::Cursor;
-    AppWindow.create(sf::VideoMode(800, 600), "app", sf::Style::Fullscreen);
+    AppWindow.create(sf::VideoMode(800, 600), "app", sf::Style::Default);
     AppWindow.setVerticalSyncEnabled(true);
 
     Player Player({650, 540}, {24, 32}, "Resources/Player.png");
@@ -41,8 +39,10 @@ int main()
             else if(AppEvent.type == sf::Event::LostFocus)
                 SleepWindow();
             else if(AppEvent.type == sf::Event::Resized)
+            {
                 Player.setCameraSize({static_cast< float >(AppEvent.size.width),
                 static_cast< float >(AppEvent.size.height)});
+            }
         }
         AppWindow.clear();
         DeltaTime = AppClock.restart().asSeconds();
