@@ -46,13 +46,14 @@ bool BigRect::loadFromFile(const std::string& fileName)
         }
     return true;
 }
+
 void BigRect::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     for(auto& Rect : BigRects)
         target.draw(Rect.first, states);
 }
+
 sf::Vector2f BigRect::getSize()
 {
     return static_cast< sf::Vector2f >(imageSize);
-    std::cout << "Harta: " << imageSize.x << " " << imageSize.y << "/n";
 }

@@ -3,8 +3,6 @@
 #include "CentralStuff/GlobalVariables.hpp"
 #include "BigRect/BigRect.hpp"
 
-#include <SFML/Window/Cursor.hpp>
-
 int main()
 {
     AppWindow.create(sf::VideoMode(800, 600), "app", sf::Style::Default);
