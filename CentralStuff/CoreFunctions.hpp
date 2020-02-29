@@ -11,7 +11,7 @@
 /// @return A string according with "(Rect.left, Rect.top, Rect.width, Rect.height)"
 ///
 template< typename T >
-std::string RectToString(sf::Rect< T > Rect)
+std::string RectToString(const sf::Rect< T >& Rect)
 {
     return "(" + std::to_string(Rect.left) + ", " + std::to_string(Rect.top) + ", " 
     + std::to_string(Rect.width) + ", " + std::to_string(Rect.height) + ")";
@@ -27,7 +27,7 @@ std::string RectToString(sf::Rect< T > Rect)
 /// @return A multliplied sf::Vector2
 ///
 template< typename T >
-sf::Vector2< T > operator*(sf::Vector2< T > Right, sf::Vector2< T > Left)
+sf::Vector2< T > operator*(const sf::Vector2< T >& Right, const sf::Vector2< T >& Left)
 {
     return sf::Vector2< T >(Right.x * Left.x, Right.y * Left.y);
 }

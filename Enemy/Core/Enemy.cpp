@@ -1,6 +1,6 @@
 #include "Enemy.hpp"
 
-Enemy::Enemy(sf::Vector2f Position, sf::Vector2f Size, std::string TextureFileName)
+Enemy::Enemy(const sf::Vector2f& Position, const sf::Vector2f& Size, const std::string& TextureFileName)
     : Entity(Position, Size)
 {
     initEntityAnim(TextureFileName);

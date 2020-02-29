@@ -37,6 +37,11 @@ void SleepWindow()
         {
             if(AppEvent.type == sf::Event::GainedFocus)
                 return;
+            if(AppEvent.type == sf::Event::Closed)
+            {
+                AppWindow.close();
+                return;
+            }
         }
     }
 }

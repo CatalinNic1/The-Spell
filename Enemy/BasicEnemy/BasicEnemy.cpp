@@ -5,11 +5,11 @@
 #define DistanceTreshold 128.f
 #define MaxActions 3.f
 
-BasicEnemy::BasicEnemy(sf::Vector2f Position, sf::Vector2f Size, std::string TextureFileName)
+BasicEnemy::BasicEnemy(const sf::Vector2f& Position, const sf::Vector2f& Size, const std::string& TextureFileName)
     : Enemy(Position, Size, TextureFileName)
 {}
 
-void BasicEnemy::Update(float DeltaTime)
+void BasicEnemy::Update(const float& DeltaTime)
 {
     auto [EnemyDirection, EnemyAction] = getAction();
     moveEntity(DeltaTime, EnemyDirection);

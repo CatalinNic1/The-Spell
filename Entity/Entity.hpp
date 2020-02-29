@@ -17,13 +17,13 @@ protected:
     ///
     /// @param Direction - Self-Explanatory
     ///
-    void moveEntity(float DeltaTime, sf::Vector2f Direction);
+    void moveEntity(const float& DeltaTime, const sf::Vector2f& Direction);
     ///
     /// @brief Function used as a wrapper around Animation::Animate method
     ///
     /// @param Action - Predefined action or direction 
     ///
-    void EntityAnimate(Actions Action);
+    void EntityAnimate(const Actions& Action);
     ///
     /// @brief Here is where animations will be ititialize by calling Animation::setFrameLimit()
     ///
@@ -41,7 +41,7 @@ public:
     ///
     /// @param Size - How big you want the enemy to be in pixel size
     ///
-    Entity(sf::Vector2f Position, sf::Vector2f Size);
+    Entity(const sf::Vector2f& Position, const sf::Vector2f& Size);
     // Internal variable for moving, drawing and collinding entity.
     // Well the Entity itself is there, but not the logic
     SmartRect EntityRect;

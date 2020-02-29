@@ -23,7 +23,7 @@ private:
     ///
     /// @return The Difference in order to correct to push in a appropriate direction 
     ///
-    sf::Vector2f getInwardsCollision(SmartRect OtherObject);
+    sf::Vector2f getInwardsCollision(const SmartRect& OtherObject);
     ///
     /// @brief This is where collision is check, but inwards and for collisions with the margin of the level
     ///
@@ -31,7 +31,7 @@ private:
     ///
     /// @return The Difference in order to correct to push in a appropriate direction 
     ///
-    sf::Vector2f getInwardsCollision(sf::FloatRect OtherObjectFloatRect);
+    sf::Vector2f getInwardsCollision(const sf::FloatRect& OtherObjectFloatRect);
     ///
     /// @brief This is where collision is check, but outwards
     ///
@@ -39,7 +39,7 @@ private:
     ///
     /// @return The Difference in order to correct to push in a appropriate direction 
     ///
-    sf::Vector2f getOutwardsCollision(SmartRect OtherObject);
+    sf::Vector2f getOutwardsCollision(const SmartRect& OtherObject);
     ///
     /// @brief Used for colliding with 2 moving objects in order to get the direction based on a "PesudoLine" (range area) in that direction
     ///
@@ -47,7 +47,7 @@ private:
     ///
     /// @return a Direction (see Directions declared below)
     ///
-    sf::Vector2f getCollisionDirection(SmartRect OtherObject);
+    sf::Vector2f getCollisionDirection(const SmartRect& OtherObject);
 public:
     // Used for defining directions instead of using magic numbers
     struct Directions
@@ -75,7 +75,7 @@ public:
     ///
     /// @param SpeedFactor
     ///
-    void moveRect(float DeltaTime, sf::Vector2f Direction, float SpeedFactor = 1.f);
+    void moveRect(const float& DeltaTime, const sf::Vector2f& Direction, const float& SpeedFactor = 1.f);
     ///
     /// @brief Like .Intersect method of the float rect but It moves the entity (at this point)
     ///
@@ -85,7 +85,7 @@ public:
     ///
     /// @return It is a Boolean. I don't think this needs explation
     ///
-    bool CheckCollision(SmartRect& OtherObject, CollisionTypes CollisionType);
+    bool CheckCollision(const SmartRect& OtherObject, const CollisionTypes& CollisionType);
     ///
     /// @brief Like .Intersect method of the float rect but It moves the entity (at this point)
     ///
@@ -95,5 +95,5 @@ public:
     ///
     /// @return It is a Boolean. I don't think this needs explation
     ///
-    bool CheckCollision(sf::FloatRect OtherObjectFloatRect);
+    bool CheckCollision(const sf::FloatRect& OtherObjectFloatRect);
 };

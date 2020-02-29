@@ -19,29 +19,29 @@ public:
     ///
     /// @brief The Initializer
     /// 
-    Player(sf::Vector2f Position, sf::Vector2f Size, std::string TextureFileName);
+    Player(const sf::Vector2f& Position, const sf::Vector2f& Size, const std::string& TextureFileName);
     ///
     /// @brief Used for scaling the Cmera in order to support multiple resoultions 
     ///
     /// @param NewSize - The size of window after beeing resized
     ///
-    void setCameraSize(sf::Vector2f NewSize);
+    void setCameraSize(const sf::Vector2f& NewSize);
     ///
     /// @brief Calls all function like: UpdateView and ProcessInput
     ///
     /// @param DeltaTime - Time between frames
     ///
-    void Update(float DeltaTime);
+    void Update(const float& DeltaTime);
     ///
     /// @return Player's camera
     ///
-    sf::View getPlayerCamera();
+    const sf::View& getPlayerCamera() const;
     ///
     /// @brief Setup "The Level Border" 
     ///
     /// @param Limits - The Size of the level
     ///
-    void setLevelLimits(sf::Vector2f Limits);
+    void setLevelLimits(const sf::Vector2f& Limits);
     ///
     /// @brief Does what you see
     ///

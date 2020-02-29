@@ -3,13 +3,9 @@
 #include "CentralStuff/GlobalVariables.hpp"
 #include "BigRect/BigRect.hpp"
 
-#include <SFML/Window/Cursor.hpp>
-
 int main()
 {
-
-    sf::Cursor;
-    AppWindow.create(sf::VideoMode(800, 600), "app", sf::Style::Fullscreen);
+    AppWindow.create(sf::VideoMode(800, 600), "app", sf::Style::Default);
     AppWindow.setVerticalSyncEnabled(true);
 
     Player Player({650, 540}, {24, 32}, "Resources/Player.png");

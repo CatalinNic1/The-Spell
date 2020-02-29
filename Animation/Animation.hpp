@@ -42,7 +42,7 @@ public:
     ///
     /// @param HorizontalFrameSize - The size of the object/entity on the Y axis
     ///
-    void setFrameLimit(const std::string& TextureFileName, int HorizontalFrameSize);
+    void setFrameLimit(const std::string& TextureFileName, const int& HorizontalFrameSize);
     ///
     /// @brief Animates an object/entity depending on the action
     ///
@@ -50,5 +50,5 @@ public:
     ///
     /// @param Action - Action to animate
     ///
-    void Animate(sf::RectangleShape& EntityRect, Actions Action);
+    void Animate(sf::RectangleShape& EntityRect, const Actions& Action);
 };

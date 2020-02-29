@@ -26,11 +26,11 @@ public:
     ///
     /// @param TextureFileName - Path to the texture
     ///
-    BasicEnemy(sf::Vector2f Position, sf::Vector2f Size, std::string TextureFileName);
+    BasicEnemy(const sf::Vector2f& Position, const sf::Vector2f& Size, const std::string& TextureFileName);
     ///
     /// @brief It occupies with moving, attacking, defending where is the case
     ///
     /// @param DeltaTime - Time between frames
     ///
-    virtual void Update(float DeltaTime) override;
+    virtual void Update(const float& DeltaTime) override;
 };

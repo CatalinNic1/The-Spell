@@ -22,7 +22,7 @@ public:
     /// 
     /// @return The size exprimated in sf::Vector2f
     ///
-    sf::Vector2f getSize();
+    const sf::Vector2f& getSize();
 private:
     /// @brief Draw the object to a render target
     ///
@@ -34,5 +34,5 @@ private:
     // This is where the rects and the textures will be used in drawing
     class std::vector< std::pair< sf::RectangleShape, std::shared_ptr< sf::Texture > > > BigRects;
     // The size of the whole image
-    sf::Vector2u imageSize;
+    sf::Vector2f imageSize;
 };

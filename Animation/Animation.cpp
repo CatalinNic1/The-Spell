@@ -5,7 +5,7 @@
 #include "../CentralStuff/TypeDefs.hpp"
 #include "../ResourceManager/ResourceManager.hpp"
 
-void Animation::Animate(sf::RectangleShape& EntityRect, Actions Action)
+void Animation::Animate(sf::RectangleShape& EntityRect, const Actions& Action)
 {
     sf::Vector2f FrameSize = EntityRect.getSize();
     
@@ -36,7 +36,7 @@ void Animation::Animate(sf::RectangleShape& EntityRect, Actions Action)
     CurrentFrame++;
 }
 
-void Animation::setFrameLimit(const std::string& TextureFileName, int HorizontalFrameSize)
+void Animation::setFrameLimit(const std::string& TextureFileName, const int& HorizontalFrameSize)
 {
     sf::Image Im;
     

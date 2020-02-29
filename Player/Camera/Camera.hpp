@@ -31,7 +31,7 @@ private:
     ///
     /// @param CollisionType - You can figure out
     ///
-    void correctCamera(Camera::Collisions CollisionType);
+    void correctCamera(const Camera::Collisions& CollisionType);
     // The position of the central point in Player rectangle
     sf::Vector2f PlayerCentralPosition;
     // The area where the player can act
@@ -48,7 +48,7 @@ private:
     ///
     /// @return The Central Position Used by the View
     ///
-    sf::Vector2f getPlayerCenterPosition(sf::FloatRect PlayerRect);
+    sf::Vector2f getPlayerCenterPosition(const sf::FloatRect& PlayerRect);
     // 
     sf::Vector2f CameraSize = {0.f, 0.f};
 public:
@@ -57,15 +57,15 @@ public:
     ///
     /// @param NewSize - The size of window after beeing resized
     ///
-    void setCameraSize(sf::Vector2f NewSize);
+    void setCameraSize(const sf::Vector2f& NewSize);
     ///
     /// @brief Setup "The Level Border" 
     ///
     /// @param Limits - The Size of the level
     ///
-    void setLevelLimits(sf::Vector2f Limits);
+    void setLevelLimits(const sf::Vector2f& Limits);
     ///
     /// @brief Does what you see
     ///
-    void UpdateCamera(sf::FloatRect EntityCenter);
+    void UpdateCamera(const sf::FloatRect& EntityCenter);
 };

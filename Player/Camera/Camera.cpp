@@ -2,7 +2,7 @@
 #include "../../CentralStuff/TypeDefs.hpp"
 #include "../../CentralStuff/CoreFunctions.hpp"
 
-void Camera::setCameraSize(sf::Vector2f NewSize)
+void Camera::setCameraSize(const sf::Vector2f& NewSize)
 {
     float ScaleFactor = 1;
     while(NewSize.x / ScaleFactor > DefaultSize.x || NewSize.y / ScaleFactor > DefaultSize.y)
@@ -11,7 +11,7 @@ void Camera::setCameraSize(sf::Vector2f NewSize)
     CameraSize = {NewSize.x / ScaleFactor, NewSize.y / ScaleFactor};
 }
 
-void Camera::UpdateCamera(sf::FloatRect EntityCenter)
+void Camera::UpdateCamera(const sf::FloatRect& EntityCenter)
 {
     PlayerCentralPosition = getPlayerCenterPosition(EntityCenter);
     sf::Vector2f Direction = getCameraDirection();
@@ -22,7 +22,7 @@ void Camera::UpdateCamera(sf::FloatRect EntityCenter)
     correctCamera(CollisionType);
 }
 
-void Camera::correctCamera(Camera::Collisions CollisionType)
+void Camera::correctCamera(const Camera::Collisions& CollisionType)
 {
     sf::Vector2f CameraPosition = getCenter();
     sf::Vector2f SuperiorLimitsDiff = LevelLimits - (CameraPosition + CameraSize / 2.f);
@@ -69,12 +69,12 @@ Camera::Collisions Camera::getCollisionType()
         return Collisions::Nope;
 }
 
-void Camera::setLevelLimits(sf::Vector2f Limits)
+void Camera::setLevelLimits(const sf::Vector2f& Limits)
 {
     LevelLimits = Limits;
 }
 
-sf::Vector2f Camera::getPlayerCenterPosition(sf::FloatRect EntityRect)
+sf::Vector2f Camera::getPlayerCenterPosition(const sf::FloatRect& EntityRect)
 {
     return sf::Vector2f(EntityRect.left, EntityRect.top) + sf::Vector2f(EntityRect.width, EntityRect.height) / 2.f;
 }

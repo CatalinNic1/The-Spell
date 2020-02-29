@@ -2,7 +2,7 @@
 
 #include "Entity.hpp"
 
-Entity::Entity(sf::Vector2f Position, sf::Vector2f Size)
+Entity::Entity(const sf::Vector2f& Position, const sf::Vector2f& Size)
 {
     EntityRect.setPosition(Position);
     EntityRect.setSize(Size);
@@ -17,12 +17,12 @@ void Entity::initEntityAnim(const std::string& TextureFileName)
     EntityAnimation.setFrameLimit(TextureFileName, static_cast< int >(EntityRect.getSize().x));
 }
 
-void Entity::moveEntity(float DeltaTime, sf::Vector2f Direction)
+void Entity::moveEntity(const float& DeltaTime, const sf::Vector2f& Direction)
 {
     EntityRect.moveRect(DeltaTime, Direction);
 }
 
-void Entity::EntityAnimate(Actions Action)
+void Entity::EntityAnimate(const Actions& Action)
 {
     EntityAnimation.Animate(EntityRect, Action);
 }
