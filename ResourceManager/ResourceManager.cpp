@@ -51,14 +51,14 @@ void ResourceManager::CheckSize(const std::string& FileName, const sf::IntRect& 
         if(Im.getSize().x > sf::Texture::getMaximumSize() || Im.getSize().y > sf::Texture::getMaximumSize())
             std::runtime_error(FileName + ": " + TooBigToBeSupported);
         else if((Im.getSize().x > TextureMinSize || Im.getSize().y > TextureMinSize))
-            std::cout << FileName + ": " + TooBigCompToStdSize;
+            std::cerr << FileName + ": " + TooBigCompToStdSize;
     }
     else
     {
         if(static_cast< uint >(Area.width) > sf::Texture::getMaximumSize() || static_cast< uint >(Area.height) > sf::Texture::getMaximumSize())
             std::runtime_error(FileName + ": " + TooBigToBeSupported);
         else if(static_cast< uint >(Area.width) > TextureMinSize || static_cast< uint >(Area.height) > TextureMinSize)
-            std::cout << FileName + ": " + TooBigCompToStdSize;
+            std::cerr << FileName + ": " + TooBigCompToStdSize;
     }
 }
 

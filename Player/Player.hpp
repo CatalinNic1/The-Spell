@@ -27,6 +27,12 @@ public:
     ///
     void setCameraSize(const sf::Vector2f& NewSize);
     ///
+    /// @brief Gets the size of what the player sees
+    ///
+    /// @return The size represented in a sf::Vector2f
+    ///
+    sf::Vector2f getCameraSize();
+    ///
     /// @brief Calls all function like: UpdateView and ProcessInput
     ///
     /// @param DeltaTime - Time between frames
@@ -35,7 +41,7 @@ public:
     ///
     /// @return Player's camera
     ///
-    const sf::View& getPlayerCamera() const;
+    sf::View getPlayerCamera();
     ///
     /// @brief Setup "The Level Border" 
     ///

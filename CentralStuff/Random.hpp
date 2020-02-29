@@ -38,7 +38,7 @@ public:
     ///
     /// @brief Idk, generates a random number
     ///
-    /// @return A random number
+    /// @return A random number between 0 and 2^32 - 1
     ///
     static int getRandom()
     {
@@ -83,7 +83,7 @@ public:
     ///
     /// @brief Idk, generates a random number
     ///
-    /// @return A random number
+    /// @return A random number between 0 and 1
     ///
     static float getRandom()
     {
@@ -129,7 +129,7 @@ public:
     ///
     /// @brief Idk, generates a random number
     ///
-    /// @return A random number
+    /// @return A random number between 0 and 2^32 - 1
     ///
     static int getRandom()
     {
@@ -174,7 +174,7 @@ public:
     ///
     /// @brief Idk, generates a random number
     ///
-    /// @return A random number
+    /// @return A random number between 0 and 1
     ///
     static float getRandom()
     {

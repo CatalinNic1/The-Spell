@@ -38,9 +38,14 @@ void Player::UpdateCamera()
     PlayerCamera.UpdateCamera(EntityRect.getGlobalBounds());
 }
 
-const sf::View& Player::getPlayerCamera() const
+sf::View Player::getPlayerCamera()
 {
     return PlayerCamera;
+}
+
+sf::Vector2f Player::getCameraSize()
+{
+    return PlayerCamera.getSize();
 }
 
 void Player::setLevelLimits(const sf::Vector2f& Limits)

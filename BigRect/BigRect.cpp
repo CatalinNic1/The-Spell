@@ -6,10 +6,14 @@
 bool BigRect::loadFromFile(const std::string& fileName)
 {
     const uint maxSize = sf::Texture::getMaximumSize();
-    
-        sf::Image BigImage;
+    bool NeedsToCrop = false;
+
+    sf::Image BigImage;
     BigImage.loadFromFile(fileName);
     imageSize = sf::Vector2f(BigImage.getSize());
+
+    if(static_cast< uint >(imageSize.x) > maxSize || static_cast< uint >(imageSize.y) > maxSize)
+        NeedsToCrop = true;
 
     for(uint x = 0u; x < static_cast< uint >(imageSize.x); x += maxSize)
         for(uint y = 0u; y < static_cast< uint >(imageSize.y); y += maxSize)
@@ -18,8 +22,15 @@ bool BigRect::loadFromFile(const std::string& fileName)
 
             try
             {
-                Rect.second = ResourceManager::Acquire(fileName, sf::IntRect(static_cast< int >(x), 
-                static_cast< int >(y), static_cast< int >(maxSize), static_cast< int >(maxSize)));
+                if(NeedsToCrop)
+                {
+                    Rect.second = ResourceManager::Acquire(fileName, sf::IntRect(static_cast< int >(x), 
+                    static_cast< int >(y), static_cast< int >(maxSize), static_cast< int >(maxSize)));
+                }
+                else
+                {
+                    Rect.second = ResourceManager::Acquire(fileName);
+                }
             }
             catch(const std::exception& Exception)
             {
@@ -35,6 +46,7 @@ bool BigRect::loadFromFile(const std::string& fileName)
         }
     return true;
 }
+
 void BigRect::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     for(auto& Rect : BigRects)

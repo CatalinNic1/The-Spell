@@ -37,8 +37,10 @@ int main()
             else if(AppEvent.type == sf::Event::LostFocus)
                 SleepWindow();
             else if(AppEvent.type == sf::Event::Resized)
+            {
                 Player.setCameraSize({static_cast< float >(AppEvent.size.width),
                 static_cast< float >(AppEvent.size.height)});
+            }
         }
         AppWindow.clear();
         DeltaTime = AppClock.restart().asSeconds();
