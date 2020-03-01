@@ -22,7 +22,7 @@ int main()
 
     std::vector< BasicEnemy > Enemies;
 
-    for(int i = 1; i <= 15; i++)
+    for(int i = 1; i <= 10; i++)
     {
         BasicEnemy E({600, 600}, {24, 32}, "Resources/BasicEnemy.png");
         Enemies.emplace_back(E);
@@ -47,22 +47,24 @@ int main()
         Player.Update(DeltaTime);
 
         for(BasicEnemy& E : Enemies)
-            E.Update(DeltaTime);
-
-        for(BasicEnemy& E : Enemies)
-        {
-            Player.EntityRect.CheckCollision(E.EntityRect, SmartRect::CollisionTypes::Outwards);
-            Player.EntityRect.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
-            E.EntityRect.CheckCollision(Player.EntityRect, SmartRect::CollisionTypes::Outwards);
-            E.EntityRect.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
-        }
+        if(getPerspective().intersects(E.EntityRect.getGlobalBounds()))
+            {
+                E.Update(DeltaTime);   
+                Player.EntityRect.CheckCollision(E.EntityRect, SmartRect::CollisionTypes::Outwards);
+                Player.EntityRect.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
+                E.EntityRect.CheckCollision(Player.EntityRect, SmartRect::CollisionTypes::Outwards);
+                E.EntityRect.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
+            }
+        
+        Player.EntityRect.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
 
         Player.UpdateCamera();
         AppWindow.setView(Player.getPlayerCamera());
         AppWindow.draw(Map);
 
         for(BasicEnemy& E : Enemies)
-            AppWindow.draw(E.EntityRect);
+            if(getPerspective().intersects(E.EntityRect.getGlobalBounds()))
+                AppWindow.draw(E.EntityRect);
 
         AppWindow.draw(Player.EntityRect);
         AppWindow.display();
