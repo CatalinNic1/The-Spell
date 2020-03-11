@@ -56,8 +56,8 @@ int main()
                         
             Player.EntityRect.CheckCollision(E.EntityRect, SmartRect::CollisionTypes::Outwards);
             Player.EntityRect.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
+            
             Player.EntityRect.CheckCollision(Cage, SmartRect::CollisionTypes::Outwards);
-
             if(E.EntityRect.CheckCollision(Cage, SmartRect::CollisionTypes::Outwards))
                 E.setObstcaleInfo(Cage.getGlobalBounds());
             
