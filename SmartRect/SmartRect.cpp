@@ -4,52 +4,50 @@
 void SmartRect::moveRect(const float& DeltaTime, const sf::Vector2f& Direction, const float& SpeedFactor)
 {
     move(DeltaTime * MovingSpeed * Direction * SpeedFactor);
-    MovingDirection = Direction;
-    //if(Direction != Directions::Stop)
-    //    MovingDirection = Direction;
+    if(Direction != Directions::Stop)
+        FacingDirection = Direction;
     PseudoLineThickness = DeltaTime * MovingSpeed;
 }
 
 sf::Vector2f SmartRect::getCollisionDirection(const SmartRect& OtherObject)
 {
-    if(MovingDirection != Directions::Stop)
+    sf::FloatRect OtherObjectFloatRect = OtherObject.getGlobalBounds();
+    sf::FloatRect ObjectFloatRect = getGlobalBounds();
+    sf::FloatRect OtherObjectPseudoLine = sf::FloatRect();
+    sf::FloatRect ObjectPseudoLine = sf::FloatRect();
+    // Up
     {
-        sf::FloatRect OtherObjectFloatRect = OtherObject.getGlobalBounds();
-        sf::FloatRect ObjectFloatRect = getGlobalBounds();
-        sf::FloatRect OtherObjectPseudoLine = sf::FloatRect();
-        sf::FloatRect ObjectPseudoLine = sf::FloatRect();
-        // Up
-        if(MovingDirection == Directions::Up)
-        {
-            ObjectPseudoLine = sf::FloatRect(ObjectFloatRect.left, ObjectFloatRect.top - PseudoLineThickness, ObjectFloatRect.width, PseudoLineThickness * PseudoLineMultiplier);
-            OtherObjectPseudoLine = sf::FloatRect(OtherObjectFloatRect.left, OtherObjectFloatRect.top + OtherObjectFloatRect.height - PseudoLineThickness, OtherObjectFloatRect.width, PseudoLineThickness * PseudoLineMultiplier);
-        }
-        // Down
-        else if(MovingDirection == Directions::Down)
-        {
-            ObjectPseudoLine = sf::FloatRect(ObjectFloatRect.left, ObjectFloatRect.top + ObjectFloatRect.height - PseudoLineThickness, ObjectFloatRect.width, PseudoLineThickness * PseudoLineMultiplier);
-            OtherObjectPseudoLine = sf::FloatRect(OtherObjectFloatRect.left, OtherObjectFloatRect.top - PseudoLineThickness, OtherObjectFloatRect.width, PseudoLineThickness * PseudoLineMultiplier);
-        }
-        // Left
-        else if(MovingDirection == Directions::Left)
-        {
-            ObjectPseudoLine = sf::FloatRect(ObjectFloatRect.left - PseudoLineThickness, ObjectFloatRect.top, PseudoLineThickness * PseudoLineMultiplier, ObjectFloatRect.height);
-            OtherObjectPseudoLine = sf::FloatRect(OtherObjectFloatRect.left + OtherObjectFloatRect.width - PseudoLineThickness, OtherObjectFloatRect.top, PseudoLineThickness * PseudoLineMultiplier, OtherObjectFloatRect.height);
-        }
-        // Right
-        else if(MovingDirection == Directions::Right)
-        {
-            ObjectPseudoLine = sf::FloatRect(ObjectFloatRect.left + ObjectFloatRect.width - PseudoLineThickness, ObjectFloatRect.top, PseudoLineThickness * PseudoLineMultiplier, ObjectFloatRect.height);
-            OtherObjectPseudoLine = sf::FloatRect(OtherObjectFloatRect.left - PseudoLineThickness, OtherObjectFloatRect.top, PseudoLineThickness * PseudoLineMultiplier, OtherObjectFloatRect.height);
-        }
+        ObjectPseudoLine = sf::FloatRect(ObjectFloatRect.left, ObjectFloatRect.top - PseudoLineThickness, ObjectFloatRect.width, PseudoLineThickness * PseudoLineMultiplier);
+        OtherObjectPseudoLine = sf::FloatRect(OtherObjectFloatRect.left, OtherObjectFloatRect.top + OtherObjectFloatRect.height - PseudoLineThickness, OtherObjectFloatRect.width, PseudoLineThickness * PseudoLineMultiplier);
         // Verification
         if(ObjectPseudoLine.intersects(OtherObjectPseudoLine))
-            return MovingDirection;
-        else
-            return -OtherObject.MovingDirection;
+            return Directions::Up;
     }
-    else
-        return -OtherObject.MovingDirection;
+    // Down
+    {
+        ObjectPseudoLine = sf::FloatRect(ObjectFloatRect.left, ObjectFloatRect.top + ObjectFloatRect.height - PseudoLineThickness, ObjectFloatRect.width, PseudoLineThickness * PseudoLineMultiplier);
+        OtherObjectPseudoLine = sf::FloatRect(OtherObjectFloatRect.left, OtherObjectFloatRect.top - PseudoLineThickness, OtherObjectFloatRect.width, PseudoLineThickness * PseudoLineMultiplier);
+        // Verification
+        if(ObjectPseudoLine.intersects(OtherObjectPseudoLine))
+            return Directions::Down;
+    }
+    // Left
+    {
+        ObjectPseudoLine = sf::FloatRect(ObjectFloatRect.left - PseudoLineThickness, ObjectFloatRect.top, PseudoLineThickness * PseudoLineMultiplier, ObjectFloatRect.height);
+        OtherObjectPseudoLine = sf::FloatRect(OtherObjectFloatRect.left + OtherObjectFloatRect.width - PseudoLineThickness, OtherObjectFloatRect.top, PseudoLineThickness * PseudoLineMultiplier, OtherObjectFloatRect.height);
+        // Verification
+        if(ObjectPseudoLine.intersects(OtherObjectPseudoLine))
+            return Directions::Left;
+    }
+    // Right
+    {
+        ObjectPseudoLine = sf::FloatRect(ObjectFloatRect.left + ObjectFloatRect.width - PseudoLineThickness, ObjectFloatRect.top, PseudoLineThickness * PseudoLineMultiplier, ObjectFloatRect.height);
+        OtherObjectPseudoLine = sf::FloatRect(OtherObjectFloatRect.left - PseudoLineThickness, OtherObjectFloatRect.top, PseudoLineThickness * PseudoLineMultiplier, OtherObjectFloatRect.height);
+        // Verification
+        if(ObjectPseudoLine.intersects(OtherObjectPseudoLine))
+            return Directions::Right;
+    }
+    return Directions::Stop;
 }
 
 bool SmartRect::CheckCollision(const sf::FloatRect& OtherObjectFloatRect)
@@ -67,7 +65,7 @@ bool SmartRect::CheckCollision(const SmartRect& OtherObject, const CollisionType
     if(CollisionType == CollisionTypes::Inwards)
     {
         sf::Vector2f Difference = getInwardsCollision(OtherObject);
-        move(Difference * DifferenceOffset);
+        move(Difference);
         if(Difference != Axis::None)
             return true;
         else
@@ -76,7 +74,7 @@ bool SmartRect::CheckCollision(const SmartRect& OtherObject, const CollisionType
     else if(CollisionType == CollisionTypes::Outwards)
     {
         sf::Vector2f Difference = getOutwardsCollision(OtherObject);
-        move(Difference * DifferenceOffset);
+        move(Difference);
         if(Difference != Axis::None)
             return true;
         else

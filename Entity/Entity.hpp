@@ -17,7 +17,7 @@ protected:
     ///
     /// @param Direction - Self-Explanatory
     ///
-    void moveEntity(const float& DeltaTime, const sf::Vector2f& Direction);
+    void moveEntity(const float& DeltaTime, const sf::Vector2f& Direction, const float& SpeedFactor = 1.f);
     ///
     /// @brief Function used as a wrapper around Animation::Animate method
     ///

@@ -14,8 +14,6 @@ private:
         static inline const sf::Vector2f Vertical = {0.f, 1.f};
         static inline const sf::Vector2f Horizontal = {1.f, 0.f};
     };
-    // Used in collisions
-    sf::Vector2f MovingDirection = Axis::None;
     ///
     /// @brief This is where collision is check, but inwards
     ///

@@ -94,6 +94,7 @@ public:
 
 #else
 
+template< typename T >
 class RandomIntegral
 {
 private:
@@ -109,9 +110,9 @@ public:
     ///
     /// @return A random generated int
     ///
-    static int getRandom(int Min, int Max)
+    static T getRandom(T Min, T Max)
     {
-        std::uniform_int_distribution< int > randomDistribution(Min, Max);
+        std::uniform_int_distribution< T > randomDistribution(Min, Max);
         return randomDistribution(randomEngine); 
     }
     ///
@@ -121,9 +122,9 @@ public:
     ///
     /// @return A random generated int
     ///
-    static int getRandom(int Max)
+    static T getRandom(T Max)
     {
-        std::uniform_int_distribution< int > randomDistribution(0, Max);
+        std::uniform_int_distribution< T > randomDistribution(0, Max);
         return randomDistribution(randomEngine); 
     }
     ///
@@ -131,14 +132,14 @@ public:
     ///
     /// @return A random number between 0 and 2^32 - 1
     ///
-    static int getRandom()
+    static T getRandom()
     {
-        std::uniform_int_distribution< int > randomDistribution;
+        std::uniform_int_distribution< T > randomDistribution;
         return randomDistribution(randomEngine); 
     }
 };
 
-
+template< typename T >
 class RandomReal
 {
 private:
@@ -154,9 +155,9 @@ public:
     ///
     /// @return A random generated int
     ///
-    static float getRandom(float Min, float Max)
+    static T getRandom(T Min, T Max)
     {
-        std::uniform_real_distribution< float > randomDistribution(Min, Max);
+        std::uniform_real_distribution< T > randomDistribution(Min, Max);
         return randomDistribution(randomEngine); 
     }
     ///
@@ -166,9 +167,9 @@ public:
     ///
     /// @return A random generated int
     ///
-    static float getRandom(float Max)
+    static T getRandom(T Max)
     {
-        std::uniform_real_distribution< float > randomDistribution(0.f, Max);
+        std::uniform_real_distribution< T > randomDistribution(0.f, Max);
         return randomDistribution(randomEngine); 
     }
     ///
@@ -176,9 +177,9 @@ public:
     ///
     /// @return A random number between 0 and 1
     ///
-    static float getRandom()
+    static T getRandom()
     {
-        std::uniform_real_distribution< float > randomDistribution;
+        std::uniform_real_distribution< T > randomDistribution;
         return randomDistribution(randomEngine); 
     }
 };

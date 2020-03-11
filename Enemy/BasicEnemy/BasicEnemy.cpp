@@ -2,24 +2,24 @@
 #include "../../CentralStuff/Random.hpp"
 #include "../../CentralStuff/TypeDefs.hpp"
 
-#define DistanceTreshold 128.f
+#define MaxDistance 128.f
 #define MaxActions 3.f
 
 BasicEnemy::BasicEnemy(const sf::Vector2f& Position, const sf::Vector2f& Size, const std::string& TextureFileName)
     : Enemy(Position, Size, TextureFileName)
 {}
 
-void BasicEnemy::Update(const float& DeltaTime)
+void BasicEnemy::Update(float DeltaTime)
 {
     auto [EnemyDirection, EnemyAction] = getAction();
     moveEntity(DeltaTime, EnemyDirection);
-    Distance += DeltaTime * MovingSpeed;
+    WalkingDistance -= DeltaTime * MovingSpeed;
     EntityAnimate(EnemyAction);
 }
 
 std::pair< sf::Vector2f, Actions > BasicEnemy::getAction()
 {
-    if(Distance < DistanceTreshold)
+    if(WalkingDistance > 0.f)
     {
         if(Action == Actions::MoveUp)
             return {SmartRect::Directions::Up, Actions::MoveUp};
@@ -34,8 +34,8 @@ std::pair< sf::Vector2f, Actions > BasicEnemy::getAction()
     }
     else
     {
-        Action = static_cast< Actions >(RandomIntegral::getRandom(MaxActions));
-        Distance = 0.f;
+        Action = static_cast< Actions >(RandomIntegral< int >::getRandom(MaxActions));
+        WalkingDistance = MaxDistance;
         return {SmartRect::Directions::Stop, Actions::None};
     }
 }

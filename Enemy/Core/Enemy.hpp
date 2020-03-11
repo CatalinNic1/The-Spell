@@ -2,10 +2,9 @@
 
 #include "../../Entity/Entity.hpp"
 
+// Core class For Enemies
 class Enemy : public Entity
 {
-private:
-    /* data */
 protected:
     /// 
     /// @brief Used for analyzing input (random-generated or algorithm-generated)
@@ -29,5 +28,5 @@ public:
     ///
     /// @param DeltaTime - Time between frames
     ///
-    virtual void Update(const float& DeltaTime) = 0;
+    virtual void Update(float DeltaTime) = 0;
 };

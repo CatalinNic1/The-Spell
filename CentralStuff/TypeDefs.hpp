@@ -14,5 +14,3 @@ typedef unsigned long ulong;
 #define DefaultSize sf::Vector2f(480.f, 270.f)
 // Used for collisions
 #define PseudoLineMultiplier 2.f
-// Used for moving by a bit in order to not destroy collision logic
-#define DifferenceOffset 1.1f

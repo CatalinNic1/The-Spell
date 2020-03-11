@@ -23,6 +23,7 @@ add_executable(The-Spell
     ./Animation/Animation.cpp
     ./BigRect/BigRect.cpp
     ./CentralStuff/CoreFunctions.cpp
+    ./Enemy/IntelligentEnemy/IntelligentEnemy.cpp
     ./Enemy/BasicEnemy/BasicEnemy.cpp
     ./Enemy/Core/Enemy.cpp
     ./Entity/Entity.cpp

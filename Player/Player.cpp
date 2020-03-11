@@ -7,7 +7,7 @@ Player::Player(const sf::Vector2f& Position, const sf::Vector2f& Size, const std
     initEntityAnim(TextureFileName);
 }
 
-void Player::Update(const float& DeltaTime)
+void Player::Update(float DeltaTime)
 {
     auto [PlayerDirection, PlayerAction] = getAction();
     moveEntity(DeltaTime, PlayerDirection);

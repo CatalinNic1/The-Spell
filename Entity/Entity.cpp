@@ -17,9 +17,9 @@ void Entity::initEntityAnim(const std::string& TextureFileName)
     EntityAnimation.setFrameLimit(TextureFileName, static_cast< int >(EntityRect.getSize().x));
 }
 
-void Entity::moveEntity(const float& DeltaTime, const sf::Vector2f& Direction)
+void Entity::moveEntity(const float& DeltaTime, const sf::Vector2f& Direction, const float& SpeedFactor)
 {
-    EntityRect.moveRect(DeltaTime, Direction);
+    EntityRect.moveRect(DeltaTime, Direction, SpeedFactor);
 }
 
 void Entity::EntityAnimate(const Actions& Action)

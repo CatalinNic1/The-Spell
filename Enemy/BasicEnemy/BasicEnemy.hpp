@@ -6,7 +6,7 @@ class BasicEnemy : public Enemy
 {
 private:
     // Used for setting a know what distance
-    float Distance = 0.f;
+    float WalkingDistance = 0.f;
     // Used for Animation purposes
     Actions Action = Actions::None;
 protected:
@@ -32,5 +32,5 @@ public:
     ///
     /// @param DeltaTime - Time between frames
     ///
-    virtual void Update(const float& DeltaTime) override;
+    virtual void Update(float DeltaTime) override;
 };

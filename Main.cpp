@@ -1,7 +1,8 @@
 #include "Player/Player.hpp"
-#include "Enemy/BasicEnemy/BasicEnemy.hpp"
+#include "Enemy/IntelligentEnemy/IntelligentEnemy.hpp"
 #include "CentralStuff/GlobalVariables.hpp"
 #include "BigRect/BigRect.hpp"
+#include "CentralStuff/Random.hpp"
 
 int main()
 {
@@ -14,17 +15,19 @@ int main()
 
     SmartRect Cage;
     Cage.setPosition(600, 400);
-    Cage.setSize({50, 50});
-    Cage.setFillColor(sf::Color(233, 123, 31));
+    Cage.setSize({300, 25});
+    Cage.setFillColor(sf::Color(RandomIntegral< sf::Uint8 >::getRandom(255),
+                                RandomIntegral< sf::Uint8 >::getRandom(255), 
+                                RandomIntegral< sf::Uint8 >::getRandom(255)));
 
     BigRect Map;
     Map.loadFromFile("Resources/Thevillage.png");
 
-    std::vector< BasicEnemy > Enemies;
+    std::vector< IntelligentEnemy > Enemies;
 
-    for(int i = 1; i <= 10; i++)
+    for(int i = 1; i <= 1; i++)
     {
-        BasicEnemy E({600, 600}, {24, 32}, "Resources/BasicEnemy.png");
+        IntelligentEnemy E({RandomReal< float >::getRandom(600), RandomReal< float >::getRandom(600)}, {24, 32}, "Resources/BasicEnemy.png");
         Enemies.emplace_back(E);
     }
 
@@ -45,16 +48,22 @@ int main()
         AppWindow.clear();
         DeltaTime = AppClock.restart().asSeconds();
         Player.Update(DeltaTime);
+        IntelligentEnemy::setDestinationPos(Player.EntityRect.getPosition());
 
-        for(BasicEnemy& E : Enemies)
-        if(getPerspective().intersects(E.EntityRect.getGlobalBounds()))
-            {
-                E.Update(DeltaTime);   
-                Player.EntityRect.CheckCollision(E.EntityRect, SmartRect::CollisionTypes::Outwards);
-                Player.EntityRect.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
-                E.EntityRect.CheckCollision(Player.EntityRect, SmartRect::CollisionTypes::Outwards);
-                E.EntityRect.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
-            }
+        for(IntelligentEnemy& E : Enemies)
+        {
+            E.Update(DeltaTime);
+                        
+            Player.EntityRect.CheckCollision(E.EntityRect, SmartRect::CollisionTypes::Outwards);
+            Player.EntityRect.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
+            Player.EntityRect.CheckCollision(Cage, SmartRect::CollisionTypes::Outwards);
+
+            if(E.EntityRect.CheckCollision(Cage, SmartRect::CollisionTypes::Outwards))
+                E.setObstcaleInfo(Cage.getGlobalBounds());
+            
+            E.EntityRect.CheckCollision(Player.EntityRect, SmartRect::CollisionTypes::Outwards);
+            E.EntityRect.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
+        }
         
         Player.EntityRect.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
 
@@ -62,7 +71,10 @@ int main()
         AppWindow.setView(Player.getPlayerCamera());
         AppWindow.draw(Map);
 
-        for(BasicEnemy& E : Enemies)
+        if(getPerspective().intersects(Cage.getGlobalBounds()))
+            AppWindow.draw(Cage);
+
+        for(IntelligentEnemy& E : Enemies)
             if(getPerspective().intersects(E.EntityRect.getGlobalBounds()))
                 AppWindow.draw(E.EntityRect);
 

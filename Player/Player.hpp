@@ -37,7 +37,7 @@ public:
     ///
     /// @param DeltaTime - Time between frames
     ///
-    void Update(const float& DeltaTime);
+    void Update(float DeltaTime);
     ///
     /// @return Player's camera
     ///
