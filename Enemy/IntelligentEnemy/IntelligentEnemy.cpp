@@ -9,7 +9,7 @@ void IntelligentEnemy::Update(float DeltaTime)
 {
     EnemySpeed = DeltaTime * MovingSpeed / 2.f;
     auto [EnemyDirection, EnemyAction] = getAction();
-    moveEntity(DeltaTime, EnemyDirection, 0.75);
+    moveEntity(DeltaTime, EnemyDirection, 0.9f);
     EntityAnimate(EnemyAction);
 }
 

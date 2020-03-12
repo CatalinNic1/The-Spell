@@ -1,6 +1,8 @@
 #pragma once
 
 #include <string>
+#include <cmath>
+
 #include <SFML/Graphics/Rect.hpp>
 
 ///
@@ -30,6 +32,16 @@ template< typename T >
 sf::Vector2< T > operator*(const sf::Vector2< T >& Right, const sf::Vector2< T >& Left)
 {
     return sf::Vector2< T >(Right.x * Left.x, Right.y * Left.y);
+}
+///
+///
+///
+template< typename T >
+sf::Vector2< T > RotateAround(sf::Vector2< T > Point, sf::Vector2< T > Origin, float RadAngle) 
+{
+    sf::Vector2< T > PointAtZero = Point - Origin;
+    return Origin + sf::Vector2< T >(PointAtZero.x * std::cos(RadAngle) - PointAtZero.y * std::sin(RadAngle), 
+                                    PointAtZero.x * std::sin(RadAngle) + PointAtZero.y * std::cos(RadAngle));
 }
 ///
 /// @brief Strippts the extension of the file

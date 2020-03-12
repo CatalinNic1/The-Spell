@@ -32,9 +32,10 @@ add_executable(The-Spell
     ./Player/Player.cpp
     ./ResourceManager/ResourceManager.cpp
     ./SmartRect/SmartRect.cpp
-    ./Tile/Tile.cpp
+    ./TileMap/TileMap.cpp
     ./Main.cpp
 )
 
 target_link_libraries(The-Spell sfml-graphics sfml-audio sfml-window sfml-system tgui)
 file(COPY Resources/ DESTINATION ${CMAKE_BINARY_DIR}/Resources)
+file(COPY Tilesets/ DESTINATION ${CMAKE_BINARY_DIR}/Tilesets)

@@ -1,3 +1,4 @@
+#include "TileMap/TileMap.hpp"
 #include "Player/Player.hpp"
 #include "Enemy/IntelligentEnemy/IntelligentEnemy.hpp"
 #include "CentralStuff/GlobalVariables.hpp"
@@ -9,7 +10,25 @@ int main()
     AppWindow.create(sf::VideoMode(800, 600), "app", sf::Style::Default);
     AppWindow.setVerticalSyncEnabled(true);
 
-    Player Player({650, 540}, {24, 32}, "Resources/Player.png");
+    std::vector< TileInfo > Test =
+    {
+        {{384.f, 96.f}, Rotation::QuadrantI}, {{416.f, 96.f}, Rotation::QuadrantI},  {{448.f, 96.f}, Rotation::QuadrantI},
+        {{384.f, 128.f}, Rotation::QuadrantI}, {{416.f, 128.f}, Rotation::QuadrantI}, {{448.f, 128.f}, Rotation::QuadrantI},
+        {{384.f, 160.f}, Rotation::QuadrantI}, {{416.f, 160.f}, Rotation::QuadrantI}, {{448.f, 160.f}, Rotation::QuadrantI}
+    };
+
+    TileMap Map;
+
+    Map.setTileSize(TileSize);
+    Map.setMapSize({3, 3});
+    
+    if(!Map.loadTileMap("Tilesets/PathAndObjects.png", Test))
+    {
+        printf("Failed to Load\n");
+        return EXIT_FAILURE;
+    }
+
+    /*Player Player({650, 540}, {24, 32}, "Resources/Player.png");
     Player.setCameraSize({800, 600});
     Player.setLevelLimits({1280, 768});
 
@@ -28,8 +47,8 @@ int main()
     for(int i = 1; i <= 1; i++)
     {
         IntelligentEnemy E({RandomReal< float >::getRandom(600), RandomReal< float >::getRandom(600)}, {24, 32}, "Resources/BasicEnemy.png");
-        Enemies.emplace_back(E);
-    }
+        Enemies.emplace_back(E);include "../CentralStuff/TypeDefs.hpp
+    }*/
 
     while(AppWindow.isOpen())
     {
@@ -41,13 +60,13 @@ int main()
                 SleepWindow();
             else if(AppEvent.type == sf::Event::Resized)
             {
-                Player.setCameraSize({static_cast< float >(AppEvent.size.width),
-                static_cast< float >(AppEvent.size.height)});
+                //Player.setCameraSize({static_cast< float >(AppEvent.size.width),
+                //static_cast< float >(AppEvent.size.height)});
             }
         }
         AppWindow.clear();
         DeltaTime = AppClock.restart().asSeconds();
-        Player.Update(DeltaTime);
+        /*Player.Update(DeltaTime);
         IntelligentEnemy::setDestinationPos(Player.EntityRect.getPosition());
 
         for(IntelligentEnemy& E : Enemies)
@@ -68,7 +87,7 @@ int main()
         Player.EntityRect.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
 
         Player.UpdateCamera();
-        AppWindow.setView(Player.getPlayerCamera());
+        AppWindow.setView(Player.getPlayerCamera());*
         AppWindow.draw(Map);
 
         if(getPerspective().intersects(Cage.getGlobalBounds()))
@@ -78,7 +97,8 @@ int main()
             if(getPerspective().intersects(E.EntityRect.getGlobalBounds()))
                 AppWindow.draw(E.EntityRect);
 
-        AppWindow.draw(Player.EntityRect);
+        AppWindow.draw(Player.EntityRect);*/
+        AppWindow.draw(Map);
         AppWindow.display();
     }
     return 0;

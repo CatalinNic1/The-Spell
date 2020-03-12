@@ -6,6 +6,7 @@
 
 #define TooBigToBeSupported "The image is bigger than the minimal size for all GPUs. \n\
 Consider disabling the mod that you loaded.\n"
+
 #define TooBigCompToStdSize "Warning: \n\
 The image is bigger than the minimal size for all GPUs. \n\
 Please use TileSets with the maximum resolution of 512x512, \n\
