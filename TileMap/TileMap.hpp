@@ -22,6 +22,12 @@ struct TileInfo
     sf::Vector2f TexturePos;
     //
     Rotation TileRotation;
+    ///
+    ///
+    ///
+    TileInfo(const sf::Vector2f& TextureP, const Rotation& TileR)
+        : TexturePos(TextureP), TileRotation(TileR)
+    {}
 };
 
 class TileMap : public sf::Drawable, public sf::Transformable

@@ -13,6 +13,12 @@ protected:
     ///
     virtual std::pair< sf::Vector2f, Actions > getAction() = 0;
 public:
+    //
+    enum class Type
+    {
+        Basic,
+        Intelligent
+    };
     ///
     /// @brief Enemy constructor, this is where enemy will be initialized
     ///
