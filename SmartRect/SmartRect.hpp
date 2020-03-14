@@ -63,7 +63,7 @@ public:
         Outwards
     };
     // This can be used lately for projectiles and other stuff
-    sf::Vector2f FacingDirection = Directions::Down;
+    sf::Vector2f FacingDirection = Directions::Stop;
     ///
     /// @brief I think this is self-explanatory
     ///

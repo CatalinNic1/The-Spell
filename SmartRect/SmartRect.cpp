@@ -47,7 +47,7 @@ sf::Vector2f SmartRect::getCollisionDirection(const SmartRect& OtherObject)
         if(ObjectPseudoLine.intersects(OtherObjectPseudoLine))
             return Directions::Right;
     }
-    return Directions::Stop;
+    return -OtherObject.FacingDirection;
 }
 
 bool SmartRect::CheckCollision(const sf::FloatRect& OtherObjectFloatRect)
