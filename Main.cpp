@@ -7,7 +7,7 @@ int main()
     AppWindow.create(sf::VideoMode(1280, 768), "app", sf::Style::Default);
     AppWindow.setVerticalSyncEnabled(true);
 
-    TileMap Background;
+    std::vector< TileMap > Background;
     std::vector< std::unique_ptr< Enemy > > Enemies;
 
     if(!LevelParser::openFile("Levels/Test.json"))
@@ -60,7 +60,8 @@ int main()
         Player.UpdateCamera();
         AppWindow.setView(Player.getPlayerCamera());
 
-        AppWindow.draw(Background);
+        for(TileMap& Layer : Background)
+            AppWindow.draw(Layer);
 
         for(std::unique_ptr< Enemy >& E : Enemies)
             if(getPerspective().intersects(E->EntityRect.getGlobalBounds()))

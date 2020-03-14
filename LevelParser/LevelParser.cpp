@@ -81,46 +81,52 @@ bool LevelParser::loadEnemies(std::vector< std::unique_ptr< Enemy > >& Enemies)
     return true;
 }
 
-bool LevelParser::loadBackground(TileMap& Background)
+bool LevelParser::loadBackground(std::vector< TileMap >& Background)
 {
-    std::vector< TileInfo > BackgroundInfo;
+    sf::Vector2f TileSize = sf::Vector2f
+    (
+        Root["Map"]["Background"]["TileSize"][0].asFloat(),
+        Root["Map"]["Background"]["TileSize"][1].asFloat()
+    );
+    sf::Vector2u BackgroundSize = sf::Vector2u
+    (
+        Root["Map"]["Background"]["Size"][0].asUInt(),
+        Root["Map"]["Background"]["Size"][1].asUInt()
+    );
 
-    try
+    for(Json::Value& LayerInfo : Root["Map"]["Background"]["Layers"])
     {
-        std::string TileSetFileName = Root["Map"]["Background"]["FileName"].asString();
-        sf::Vector2f TileSize = sf::Vector2f
-        (
-            Root["Map"]["Background"]["TileSize"][0].asFloat(),
-            Root["Map"]["Background"]["TileSize"][1].asFloat()
-        );
-        sf::Vector2u BackgroundSize = sf::Vector2u
-        (
-            Root["Map"]["Background"]["Size"][0].asUInt(),
-            Root["Map"]["Background"]["Size"][1].asUInt()
-        );
+        TileMap Layer;
+        std::vector< TileInfo > BackgroundInfo;
 
-        for(Json::Value& Val : Root["Map"]["Background"]["Info"])
+        try
         {
-            BackgroundInfo.emplace_back
-            (
-                sf::Vector2f(Val[0].asFloat(), Val[1].asFloat()),
-                static_cast< Rotation >(Val[2].asInt())
-            );
+            Layer.setTileSize(TileSize);
+            Layer.setMapSize(BackgroundSize);
+
+            std::string TileSetFileName = LayerInfo["Filename"].asString();
+
+            for(Json::Value& Val : LayerInfo["Info"])
+            {
+                BackgroundInfo.emplace_back
+                (
+                    sf::Vector2f(Val[0].asFloat(), Val[1].asFloat()),
+                    static_cast< Rotation >(Val[2].asInt())
+                );
+            }
+
+            if(!Layer.loadTileMap(TileSetFileName, BackgroundInfo))
+            {
+                throw std::runtime_error("Loading Went Wrong");
+            }
+
+            Background.emplace_back(Layer);
         }
-
-        Background.setTileSize(TileSize);
-        Background.setMapSize(BackgroundSize);
-
-        if(!Background.loadTileMap(TileSetFileName, BackgroundInfo))
+        catch(const std::exception& Exception)
         {
-            throw std::runtime_error("Loading Went Wrong");
+            std::cerr << Exception.what() << '\n';
+            return false;
         }
-        
-    }
-    catch(const std::exception& Exception)
-    {
-        std::cerr << Exception.what() << '\n';
-        return false;
     }
 
     return true;

@@ -5,6 +5,7 @@
 #include "../CentralStuff/CoreFunctions.hpp"
 
 #define Pi 3.14f
+#define NoTexturePos sf::Vector2f(-1, -1)
 typedef unsigned int uint;
 
 void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -75,6 +76,10 @@ bool TileMap::loadTileMap(const std::string& TileSet, const std::vector< TileInf
         for(uint j = 0; j < MapSize.y; j++)
         {
             TileInfo Tile = Tiles[i + j * MapSize.x];
+
+            if(Tile.TexturePos == NoTexturePos)
+                continue;
+
             sf::Vertex* Quad = &Vertices[(i + j * MapSize.x) * 4];
             sf::Vector2f QuadPosition = sf::Vector2f(static_cast< float >(i) * TileSize.x, 
                                                     static_cast< float >(j) * TileSize.y);
@@ -91,7 +96,8 @@ bool TileMap::loadTileMap(const std::string& TileSet, const std::vector< TileInf
 
             if(!RotateTile(Quad, Tile.TileRotation))
             {
-                std::cerr << "Rotation went wrong\nTileRotation: " << static_cast< int >(Tile.TileRotation) << "\n";
+                std::cerr << "Rotation went wrong\nTileRotation: " 
+                << static_cast< int >(Tile.TileRotation) << "\n";
                 Vertices.clear();
                 return false;
             }

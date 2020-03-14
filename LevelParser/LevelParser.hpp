@@ -31,5 +31,5 @@ public:
     ///
     ///
     ///
-    static bool loadBackground(TileMap& Background);
+    static bool loadBackground(std::vector< TileMap >& Background);
 };
