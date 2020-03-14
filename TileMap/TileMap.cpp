@@ -70,7 +70,6 @@ bool TileMap::loadTileMap(const std::string& TileSet, const std::vector< TileInf
     }
 
     Vertices.setPrimitiveType(sf::Quads);
-    Vertices.resize(MapSize.x * MapSize.y * 4);
 
     for(uint i = 0; i < MapSize.x; i++)
         for(uint j = 0; j < MapSize.y; j++)
@@ -80,7 +79,7 @@ bool TileMap::loadTileMap(const std::string& TileSet, const std::vector< TileInf
             if(Tile.TexturePos == NoTexturePos)
                 continue;
 
-            sf::Vertex* Quad = &Vertices[(i + j * MapSize.x) * 4];
+            sf::Vertex Quad[4];
             sf::Vector2f QuadPosition = sf::Vector2f(static_cast< float >(i) * TileSize.x, 
                                                     static_cast< float >(j) * TileSize.y);
             
@@ -101,6 +100,9 @@ bool TileMap::loadTileMap(const std::string& TileSet, const std::vector< TileInf
                 Vertices.clear();
                 return false;
             }
+            
+            for(uint Index = 0; Index < 4; Index++)
+                Vertices.append(Quad[Index]);
         }
 
     return true;
