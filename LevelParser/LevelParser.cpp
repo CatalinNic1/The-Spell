@@ -4,6 +4,9 @@
 
 bool LevelParser::openFile(const std::string& FileName)
 {
+    Root.clear();
+    ResourceManager::RemoveOrphans();
+
     Reader.close();
     Reader.open(FileName);
 
@@ -12,9 +15,6 @@ bool LevelParser::openFile(const std::string& FileName)
         std::cerr << "File: " + FileName + " couldn't be opened\n";
         return false;
     }
-
-    Root.clear();
-    ResourceManager::RemoveOrphans();
     
     try
     {

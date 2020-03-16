@@ -24,7 +24,6 @@ int main()
     Player.setCameraSize(sf::Vector2f(AppWindow.getSize()));
     Player.setLevelLimits({1280, 768});
 
-
     while(AppWindow.isOpen())
     {
         while(AppWindow.pollEvent(AppEvent))
@@ -70,5 +69,5 @@ int main()
         AppWindow.draw(Player.EntityRect);
         AppWindow.display();
     }
-    return 0;
+    return EXIT_SUCCESS;
 }

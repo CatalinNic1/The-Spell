@@ -1,10 +1,10 @@
 #include "Player.hpp"
 #include <iostream>
 
-Player::Player(const sf::Vector2f& Position, const sf::Vector2f& Size, const std::string& TextureFileName): 
+Player::Player(const sf::Vector2f& Position, const sf::Vector2f& Size, const std::string& TextureFilename): 
     Entity(Position, Size)
 {
-    initEntityAnim(TextureFileName);
+    initEntityAnim(TextureFilename);
 }
 
 void Player::Update(float DeltaTime)

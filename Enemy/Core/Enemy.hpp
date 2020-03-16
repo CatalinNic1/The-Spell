@@ -2,6 +2,12 @@
 
 #include "../../Entity/Entity.hpp"
 
+struct EnemyInfo : public EnityInfo
+{
+    //
+    Enemy::Type Type;
+};
+
 // Core class For Enemies
 class Enemy : public Entity
 {
@@ -26,9 +32,9 @@ public:
     ///
     /// @param Size - How big you want the enemy to be in pixel size
     ///
-    /// @param TextureFileName - Path to the texture
+    /// @param TextureFilename - Path to the texture
     ///
-    Enemy(const sf::Vector2f& Position, const sf::Vector2f& Size, const std::string& TextureFileName);
+    Enemy(const sf::Vector2f& Position, const sf::Vector2f& Size, const std::string& TextureFilename);
     ///
     /// @brief It occupies with moving, attacking, defending where is the case
     ///

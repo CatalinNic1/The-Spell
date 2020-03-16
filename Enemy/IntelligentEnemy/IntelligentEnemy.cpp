@@ -1,8 +1,8 @@
 #include "IntelligentEnemy.hpp"
 #include "../../CentralStuff/TypeDefs.hpp"
 
-IntelligentEnemy::IntelligentEnemy(const sf::Vector2f& Position, const sf::Vector2f& Size, const std::string& TextureFileName)
-    : Enemy(Position, Size, TextureFileName)
+IntelligentEnemy::IntelligentEnemy(const sf::Vector2f& Position, const sf::Vector2f& Size, const std::string& TextureFilename)
+    : Enemy(Position, Size, TextureFilename)
 {}
 
 void IntelligentEnemy::Update(float DeltaTime)

@@ -24,9 +24,9 @@ public:
     ///
     /// @param Size - How big you want the enemy to be in pixel size
     ///
-    /// @param TextureFileName - Path to the texture
+    /// @param TextureFilename - Path to the texture
     ///
-    BasicEnemy(const sf::Vector2f& Position, const sf::Vector2f& Size, const std::string& TextureFileName);
+    BasicEnemy(const sf::Vector2f& Position, const sf::Vector2f& Size, const std::string& TextureFilename);
     ///
     /// @brief It occupies with moving, attacking, defending where is the case
     ///

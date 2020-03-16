@@ -21,7 +21,7 @@ void Animation::Animate(sf::RectangleShape& EntityRect, const Actions& Action)
     if(NeedsToLoad == true)
     {
         ResourceManager::RemoveOrphans();
-        AnimTexture = ResourceManager::Acquire(FileName, 
+        AnimTexture = ResourceManager::Acquire(Filename, 
         sf::IntRect(CurrentFrame * static_cast<int>(FrameSize.x), 
         static_cast<int>(CurrentAction) * static_cast<int>(FrameSize.y), 
         static_cast<int>(FrameSize.x), static_cast<int>(FrameSize.y)));
@@ -36,11 +36,11 @@ void Animation::Animate(sf::RectangleShape& EntityRect, const Actions& Action)
     CurrentFrame++;
 }
 
-void Animation::setFrameLimit(const std::string& TextureFileName, const int& HorizontalFrameSize)
+void Animation::setFrameLimit(const std::string& TextureFilename, const int& HorizontalFrameSize)
 {
     sf::Image Im;
     
-    Im.loadFromFile(TextureFileName);
+    Im.loadFromFile(TextureFilename);
     sf::Vector2u TextureSize = Im.getSize();
     
     FrameLimit = static_cast<int>(TextureSize.x) / HorizontalFrameSize;
@@ -49,6 +49,6 @@ void Animation::setFrameLimit(const std::string& TextureFileName, const int& Hor
     if(TextureSize.x > sf::Texture::getMaximumSize() || TextureSize.y > sf::Texture::getMaximumSize())
     {
         NeedsToLoad = true;
-        FileName = TextureFileName;
+        Filename = TextureFilename;
     }
 }

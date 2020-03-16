@@ -4,6 +4,9 @@
 #include  "EventHandler/EventHandler.hpp"
 #include "Camera/Camera.hpp"
 
+struct PlayerInfo : public EnityInfo
+{};
+
 class Player : public Entity 
 {
 private:
@@ -19,7 +22,7 @@ public:
     ///
     /// @brief The Initializer
     /// 
-    Player(const sf::Vector2f& Position, const sf::Vector2f& Size, const std::string& TextureFileName);
+    Player(const sf::Vector2f& Position, const sf::Vector2f& Size, const std::string& TextureFilename);
     ///
     /// @brief Used for scaling the Cmera in order to support multiple resoultions 
     ///

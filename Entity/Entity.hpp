@@ -6,6 +6,16 @@
 #include "../ResourceManager/ResourceManager.hpp"
 #include "../SmartRect/SmartRect.hpp"
 
+struct EnityInfo
+{
+    //
+    sf::Vector2f Position;
+    //
+    sf::Vector2f Size;
+    //
+    std::string TextureFilename;
+};
+
 // Core class for NPC's, Player and Enemies 
 class Entity
 {
@@ -27,9 +37,9 @@ protected:
     ///
     /// @brief Here is where animations will be ititialize by calling Animation::setFrameLimit()
     ///
-    /// @param TextureFileName - Path of the image to be loaded
+    /// @param TextureFilename - Path of the image to be loaded
     ///
-    void initEntityAnim(const std::string& TextureFileName);
+    void initEntityAnim(const std::string& TextureFilename);
 private:
     // Variable used for animating an entity movement or action
     Animation EntityAnimation;

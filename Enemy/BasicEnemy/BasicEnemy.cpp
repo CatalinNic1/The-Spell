@@ -5,8 +5,8 @@
 #define MaxDistance 128.f
 #define MaxActions 3.f
 
-BasicEnemy::BasicEnemy(const sf::Vector2f& Position, const sf::Vector2f& Size, const std::string& TextureFileName)
-    : Enemy(Position, Size, TextureFileName)
+BasicEnemy::BasicEnemy(const sf::Vector2f& Position, const sf::Vector2f& Size, const std::string& TextureFilename)
+    : Enemy(Position, Size, TextureFilename)
 {}
 
 void BasicEnemy::Update(float DeltaTime)

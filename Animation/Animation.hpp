@@ -29,7 +29,7 @@ private:
     // This is used to indicate thst it needs  
     bool NeedsToLoad = false;
     // This is used for loading purposes
-    std::string FileName;
+    std::string Filename;
 public:
     // This is wehere texture lives
     std::shared_ptr< sf::Texture > AnimTexture;
@@ -38,11 +38,11 @@ public:
     /// this is where the function will decide if it needs to switch textures or not, 
     /// that is achived by verifying if the size of the whole texture is exceeding the recomended size 
     ///
-    /// @param TextureFileName - Path of the image to be loaded
+    /// @param TextureFilename - Path of the image to be loaded
     ///
     /// @param HorizontalFrameSize - The size of the object/entity on the Y axis
     ///
-    void setFrameLimit(const std::string& TextureFileName, const int& HorizontalFrameSize);
+    void setFrameLimit(const std::string& TextureFilename, const int& HorizontalFrameSize);
     ///
     /// @brief Animates an object/entity depending on the action
     ///
