@@ -16,3 +16,8 @@ void Info::AddEnemy(const EnemyInfo& Info)
 {
     Enemies.emplace_back(Info);
 }
+
+void Info::SetPlayer(const PlayerInfo& Info)
+{
+    Player = Info;
+}

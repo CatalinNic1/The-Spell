@@ -18,7 +18,7 @@ private:
     //
     std::vector< EnemyInfo > Enemies;
     //
-    std::unique_ptr< PlayerInfo > Player;
+    PlayerInfo Player;
 public:
     ///
     ///
@@ -31,4 +31,5 @@ public:
     ///
     ///
     ///
+    void SetPlayer(const PlayerInfo& Info);
 };
