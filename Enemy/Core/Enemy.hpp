@@ -2,12 +2,6 @@
 
 #include "../../Entity/Entity.hpp"
 
-struct EnemyInfo : public EnityInfo
-{
-    //
-    Enemy::Type Type;
-};
-
 // Core class For Enemies
 class Enemy : public Entity
 {
@@ -41,4 +35,10 @@ public:
     /// @param DeltaTime - Time between frames
     ///
     virtual void Update(float DeltaTime) = 0;
+};
+
+struct EnemyInfo : public EnityInfo
+{
+    //
+    Enemy::Type Type;
 };

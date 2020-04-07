@@ -10,7 +10,23 @@ private:
     //
     Info Informations;
     //
+    PlayerInfo PlayerInfoTemp;
+    //
+    EnemyInfo EnemyInfoTemp;
+    //
     tgui::Gui CentralGui;
+    ///
+    ///
+    ///
+    void CreatePlayerInterface();
+    ///
+    ///
+    ///
+    void CreateEnemyInterface();
+    ///
+    ///
+    ///
+    void CreateTileInterface();
 public:
     ///
     ///
@@ -24,12 +40,4 @@ public:
     ///
     ///
     bool handleGuiEvent(const sf::Event& Event);
-    ///
-    ///
-    ///
-    void CreatePlayerInterface();
-    ///
-    ///
-    ///
-    void CreateEnemyInterface();
 };

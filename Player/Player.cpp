@@ -35,7 +35,7 @@ void Player::setCameraSize(const sf::Vector2f& NewSize)
 
 void Player::UpdateCamera()
 {
-    PlayerCamera.UpdateCamera(EntityRect.getGlobalBounds());
+    PlayerCamera.UpdateCamera(getGlobalBounds());
 }
 
 sf::View Player::getPlayerCamera()

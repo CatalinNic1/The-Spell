@@ -17,7 +17,7 @@ struct EnityInfo
 };
 
 // Core class for NPC's, Player and Enemies 
-class Entity
+class Entity : public sf::Drawable
 {
 protected:
     ///
@@ -43,6 +43,13 @@ protected:
 private:
     // Variable used for animating an entity movement or action
     Animation EntityAnimation;
+    // Internal variable for moving, drawing and collinding entity.
+    // Well the Entity itself is there, but not the logic
+    SmartRect EntityRect;
+    ///
+    ///
+    ///
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 public:
     ///
     /// @brief Initializer construct for entity
@@ -52,7 +59,28 @@ public:
     /// @param Size - How big you want the enemy to be in pixel size
     ///
     Entity(const sf::Vector2f& Position, const sf::Vector2f& Size);
-    // Internal variable for moving, drawing and collinding entity.
-    // Well the Entity itself is there, but not the logic
-    SmartRect EntityRect;
+    ///
+    ///
+    ///
+    bool CheckCollision(Entity& Other, const SmartRect::CollisionTypes& CollisionType);
+    ///
+    ///
+    ///
+    bool CheckCollision(const sf::FloatRect& Area);
+    ///
+    ///
+    ///
+    sf::Vector2f getPosition();
+    ///
+    ///
+    ///
+    sf::Vector2f getSize();
+    ///
+    ///
+    ///
+    sf::Vector2f getFacingDirection();
+    ///
+    ///
+    ///
+    sf::FloatRect getGlobalBounds();
 };

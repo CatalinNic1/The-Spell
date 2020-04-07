@@ -2,7 +2,7 @@
 
 std::string Getters::ToScale(float Result)
 {
-    return std::to_string(Result * 100.f) + "%";
+    return std::to_string(Result * 100) + "%";
 }
 
 tgui::Layout2d Getters::getScale(const sf::Vector2f& Left, const sf::Vector2f& ParentSize)
@@ -47,12 +47,6 @@ void Getters::getFloat(tgui::EditBox::Ptr EditBox, float& Variable)
 
 void Getters::getString(tgui::EditBox::Ptr EditBox, std::string& Variable)
 {
-    try
-    {
+    if(!EditBox->getText().isEmpty())
         Variable = EditBox->getText();
-    }
-    catch(const std::exception& Exception)
-    {
-        Variable = " ";
-    }
 }

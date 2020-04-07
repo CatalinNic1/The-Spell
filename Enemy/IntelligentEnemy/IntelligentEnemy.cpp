@@ -19,7 +19,7 @@ std::pair< sf::Vector2f, Actions > IntelligentEnemy::getAction()
         return EvitObstacle();
     else
     {
-        sf::Vector2f Position = EntityRect.getPosition();
+        sf::Vector2f Position = getPosition();
         
         if(Position.x < PlayerPos.x - EnemySpeed)
             return {SmartRect::Directions::Right, Actions::MoveRight};
@@ -36,11 +36,11 @@ std::pair< sf::Vector2f, Actions > IntelligentEnemy::getAction()
 
 std::pair< sf::Vector2f, Actions > IntelligentEnemy::EvitObstacle()
 {
-    sf::Vector2f Position = EntityRect.getPosition();
-    sf::Vector2f Size = EntityRect.getSize();
+    sf::Vector2f Position = getPosition();
+    sf::Vector2f Size = getSize();
 
     if(DirectionOnCollision == SmartRect::Directions::Stop)
-        DirectionOnCollision = EntityRect.FacingDirection;
+        DirectionOnCollision = getFacingDirection();
 
     if(DirectionOnCollision == SmartRect::Directions::Up || DirectionOnCollision == SmartRect::Directions::Down)
     {

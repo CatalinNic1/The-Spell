@@ -2,26 +2,28 @@
 
 #include <TGUI/Widgets/EditBox.hpp>
 
-struct Getters
+class Getters
 {
 private:
     ///
     ///
     ///
     static std::string ToScale(float Result);
+    ///
+    ///
+    ///
+    static bool ContainsDigits(const std::string& Text);
 public:
     ///
     ///
     ///
-    static void getInt(tgui::EditBox::Ptr EditBox, int& Variable);
+    template< typename Value >
+    static void getEditBoxValue(tgui::EditBox::Ptr EditBox, Value& Variable);
     ///
     ///
     ///
-    static void getFloat(tgui::EditBox::Ptr EditBox, float& Variable);
-    ///
-    ///
-    ///
-    static void getString(tgui::EditBox::Ptr EditBox, std::string& Variable);
+    template< typename Value >
+    static void getComboBoxValue(tgui::ComboBox::Ptr ComboBox, Value& Variable);
     ///
     ///
     ///
@@ -33,3 +35,5 @@ public:
     static tgui::Layout2d getCenterScale(
         const sf::Vector2f& Size, const sf::Vector2f& ParentSize = {1280, 768});
 };
+
+#include "Getters.tpp"

@@ -41,20 +41,20 @@ int main()
         AppWindow.clear();
         DeltaTime = AppClock.restart().asSeconds();
         Player.Update(DeltaTime);
-        IntelligentEnemy::setDestinationPos(Player.EntityRect.getPosition());
+        IntelligentEnemy::setDestinationPos(Player.getPosition());
 
         for(std::unique_ptr< Enemy >& E : Enemies)
         {
             E->Update(DeltaTime);
                         
-            Player.EntityRect.CheckCollision(E->EntityRect, SmartRect::CollisionTypes::Outwards);
-            Player.EntityRect.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
+            Player.CheckCollision(*E, SmartRect::CollisionTypes::Outwards);
+            Player.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
             
-            E->EntityRect.CheckCollision(Player.EntityRect, SmartRect::CollisionTypes::Outwards);
-            E->EntityRect.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
+            E->CheckCollision(Player, SmartRect::CollisionTypes::Outwards);
+            E->CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
         }
         
-        Player.EntityRect.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
+        Player.CheckCollision(sf::FloatRect({0, 0}, {1280, 768}));
 
         Player.UpdateCamera();
         AppWindow.setView(Player.getPlayerCamera());
@@ -63,10 +63,10 @@ int main()
             AppWindow.draw(Layer);
 
         for(std::unique_ptr< Enemy >& E : Enemies)
-            if(getPerspective().intersects(E->EntityRect.getGlobalBounds()))
-                AppWindow.draw(E->EntityRect);
+            if(getPerspective().intersects(E->getGlobalBounds()))
+                AppWindow.draw(*E);
 
-        AppWindow.draw(Player.EntityRect);
+        AppWindow.draw(Player);
         AppWindow.display();
     }
     return EXIT_SUCCESS;
