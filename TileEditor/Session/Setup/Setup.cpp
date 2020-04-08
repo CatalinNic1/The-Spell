@@ -200,7 +200,21 @@ void Setup::CreateEnemyInterface()
 
 Setup::Setup() 
     : CentralGui(AppWindow)
-{}
+{
+    tgui::MenuBar::Ptr Tools = Creators::CreateMenuBar
+    ({{
+        "Add",{
+            {"Player", this->CreatePlayerInterface},
+            {"Enemy", this->CreateEnemyInterface}
+    }},{
+        "Run",{
+            {"Test", []{}}
+    }},{
+        "Close",{
+            {"Exit", AppWindow.close}
+    }}});
+    CentralGui.add(Tools);
+}
 
 void Setup::drawGui()
 {

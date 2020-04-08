@@ -72,8 +72,8 @@ tgui::Label::Ptr Creators::CreateLabel(
 }
 
 template< typename Variable >
-tgui::ComboBox::Ptr Creators::CreateComboBox(const tgui::Layout2d& Position, const tgui::Layout2d& Size, 
-    const std::vector< std::string > Items, Variable& Var)
+tgui::ComboBox::Ptr Creators::CreateComboBox(const tgui::Layout2d& Position, 
+    const tgui::Layout2d& Size, const std::vector< std::string > Items, Variable& Var)
 {
     tgui::ComboBox::Ptr ComboBox = tgui::ComboBox::create();
     ComboBox->setPosition(Position);
@@ -86,24 +86,23 @@ tgui::ComboBox::Ptr Creators::CreateComboBox(const tgui::Layout2d& Position, con
     ComboBox->setSelectedItem(Items.front());
     Getters::getComboBoxValue(ComboBox, Var);
     ComboBox->getItems();
-    ComboBox->connect(Signals::ComboBox::ItemSelected, Getters::getComboBoxValue< Variable >, ComboBox, std::ref(Var));
+    ComboBox->connect(Signals::ComboBox::ItemSelected, 
+        Getters::getComboBoxValue< Variable >, ComboBox, std::ref(Var));
     return ComboBox;
 }
 
-tgui::MenuBar::Ptr Creators::CreateMenuBar(std::vector< MenuItem > MenuItems)
+tgui::MenuBar::Ptr Creators::CreateMenuBar(MenuItems&& MenuItems)
 {
     tgui::MenuBar::Ptr MenuBar = tgui::MenuBar::create();
     for(auto& Item : MenuItems)
     {
-        std::string Parent = std::get<0>(Item);
+        std::string Parent = Item.first;
         MenuBar->addMenu(Parent);
-        for(auto& ItemInfo : std::get<1>(Item))
+        for(auto& ItemInfo : Item.second)
         {
-            std::apply([Parent, MenuBar](std::string&& Name, auto&& Function)
-                {
-                    MenuBar->addMenuItem(Name);
-                    MenuBar->connectMenuItem(Parent, Name, Function);
-                }, std::move(ItemInfo));
+            std::string Child = ItemInfo.first;
+            MenuBar->addMenuItem(Child);
+            MenuBar->connectMenuItem({Parent, Child}, ItemInfo.second);
         }
     }
 

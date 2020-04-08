@@ -14,9 +14,9 @@ namespace Signals = tgui::Signals;
 struct Creators
 {
     //
-    using MenuItemInfo = std::pair< std::string, std::function< void() > >;
+    using MenuItemsInfo = std::unordered_map< std::string, std::function< void() > >;
     //
-    using MenuItem = std::pair< std::string, std::vector< MenuItemInfo > >;
+    using MenuItems = std::unordered_map< std::string, MenuItemsInfo >;
     ///
     ///
     ///
@@ -48,7 +48,7 @@ struct Creators
     ///
     ///
     ///
-    static tgui::MenuBar::Ptr CreateMenuBar(std::vector< MenuItem > MenuItems);
+    static tgui::MenuBar::Ptr CreateMenuBar(MenuItems&& MenuItems);
 };
 
 #include "Creators.tpp"
