@@ -42,4 +42,12 @@ public:
     ///
     ///
     bool SetPlayer(const PlayerInfo& Info);
+    ///
+    ///
+    ///
+    sf::Vector2f& getTileSize();
+    ///
+    ///
+    ///
+    sf::Vector2u& getMapSize();
 };

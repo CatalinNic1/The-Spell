@@ -7,10 +7,8 @@ class EditorSession
 private:
     //
     Setup SessionSetup;
-    ///
-    ///
-    ///
-    void InitInterface();
+    //
+    sf::Event EditorEvent;
 public:
     ///
     ///

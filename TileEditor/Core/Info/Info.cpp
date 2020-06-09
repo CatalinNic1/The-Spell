@@ -8,6 +8,16 @@ bool Info::SizeVerification(const sf::Vector2f& Size)
     return (Size.x <= 0.f || Size.y <= 0.f);
 }
 
+sf::Vector2f& Info::getTileSize()
+{
+    return TileSize;
+}
+
+sf::Vector2u& Info::getMapSize()
+{
+    return LayerSize;
+}
+
 bool Info::FileVerification(const std::string& Filename)
 {
     try
@@ -45,7 +55,7 @@ bool Info::AddLayer(const sf::Vector2u& LSize, const sf::Vector2f& TSize, const 
     std::vector< TileInfo > Layer;
     Layer.resize(LayerSize.x * LayerSize.y);
         
-    std::fill(Layer.begin, Layer.end, TileInfo({-1.f, -1.f}, static_cast< Rotation >(0)));
+    std::fill(Layer.begin(), Layer.end(), TileInfo({-1.f, -1.f}, static_cast< Rotation >(0)));
     Layers.emplace_back(Tileset, Layer);
     return true;
 }

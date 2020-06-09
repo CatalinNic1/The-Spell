@@ -2,6 +2,7 @@
 
 #include <TGUI/TGUI.hpp>
 
+#include "../Core/Widgets/Creators/Creators.hpp"
 #include "../Core/Info/Info.hpp"
 
 class Setup
@@ -13,6 +14,10 @@ private:
     PlayerInfo PlayerInfoTemp;
     //
     EnemyInfo EnemyInfoTemp;
+    //
+    CanvasUpdater UpdatePool;
+    //
+    std::string MapFilename;
     //
     tgui::Gui CentralGui;
     ///
@@ -27,6 +32,18 @@ private:
     ///
     ///
     void CreateTileInterface();
+    ///
+    ///
+    ///
+    void CreateEditorMenubar();
+    ///
+    ///
+    ///
+    static void Clear(const sf::Color& Color = sf::Color::Black);
+    ///
+    ///
+    ///
+    static void Display();
 public:
     ///
     ///
@@ -35,9 +52,25 @@ public:
     ///
     ///
     ///
-    void drawGui();
+    void draw();
     ///
     ///
     ///
     bool handleGuiEvent(const sf::Event& Event);
+    ///
+    ///
+    ///
+    void RemoveOrphans();
+    ///
+    ///
+    ///
+    static bool IsOpen();
+    ///
+    ///
+    ///
+    static bool PollEvent(sf::Event& Event);
+    ///
+    ///
+    ///
+    static void Exit();
 };
