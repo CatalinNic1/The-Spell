@@ -43,7 +43,7 @@ bool Info::AddLayer(const sf::Vector2u& LSize, const sf::Vector2f& TSize, const 
         std::cerr << "Error [Info::AddLayer]: Invalid Tile Size\n";
         return false;
     }
-    if(FileVerification)
+    if(FileVerification(Tileset))
     {
         std::cerr << "Error [Info::AddLayer]: Texture File Not Found\n";
         return false;
@@ -52,44 +52,43 @@ bool Info::AddLayer(const sf::Vector2u& LSize, const sf::Vector2f& TSize, const 
     LayerSize = LSize;
     TileSize = TSize;
         
-    std::vector< TileInfo > Layer;
-    Layer.resize(LayerSize.x * LayerSize.y);
+    std::vector< TileInfo > LayerInfo;
+    LayerInfo.resize(LayerSize.x * LayerSize.y);
         
-    std::fill(Layer.begin(), Layer.end(), TileInfo({-1.f, -1.f}, static_cast< Rotation >(0)));
-    Layers.emplace_back(Tileset, Layer);
+    Layers.emplace_back(Tileset, LayerInfo);
     return true;
 }
 
-bool Info::AddEnemy(const EnemyInfo& Info)
+bool Info::AddEnemy(const EnemyInfo& EnemyInfo)
 {
-    if(SizeVerification(Info.Size) == false)
+    if(SizeVerification(EnemyInfo.Size) == false)
     {
         std::cerr << "Error [Info::AddEnemy]: Invalid Size\n";
         return false;
     }
-    if(FileVerification(Info.TextureFilename) == false)
+    if(FileVerification(EnemyInfo.TextureFilename) == false)
     {
         std::cerr << "Error [Info::AddEnemy]: File Not Found\n";
         return false;
     }
 
-    Enemies.emplace_back(Info);
+    Enemies.emplace_back(EnemyInfo);
     return true;
 }
 
-bool Info::SetPlayer(const PlayerInfo& Info)
+bool Info::SetPlayer(const PlayerInfo& PlayerInfo)
 {
-    if(SizeVerification(Info.Size) == false)
+    if(SizeVerification(PlayerInfo.Size) == false)
     {
         std::cerr << "Error [Info::AddEnemy]: Invalid Size\n";
         return false;
     }
-    if(FileVerification(Info.TextureFilename) == false)
+    if(FileVerification(PlayerInfo.TextureFilename) == false)
     {
         std::cerr << "Error [Info::AddEnemy]: File Not Found\n";
         return false;
     }
 
-    Player = Info;
+    Player = PlayerInfo;
     return true;
 }

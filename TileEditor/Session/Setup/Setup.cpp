@@ -1,6 +1,6 @@
 #include "Setup.hpp"
-#include "../Core/Widgets/Creators/Creators.hpp"
-#include "../../CentralStuff/GlobalVariables.hpp"
+
+#include "../../../EngineLogic/CentralStuff/GlobalVariables.hpp"
 
 void Setup::CreatePlayerInterface()
 {
@@ -86,8 +86,9 @@ void Setup::CreatePlayerInterface()
         Getters::getScale({75, 245}, SetupWindowSize),
         Getters::getScale({100, 35}, SetupWindowSize),
         "Create", Signals::Button::Pressed,
-        Informations.SetPlayer,
-        std::ref(PlayerInfoTemp)
+        [this](const PlayerInfo& Information){
+            Informations.SetPlayer(Information);
+        }, PlayerInfoTemp
     );
     SetupWindow->add(CreatePlayer);
 }
@@ -192,8 +193,9 @@ void Setup::CreateEnemyInterface()
         Getters::getScale({75, 320}, SetupWindowSize),
         Getters::getScale({100, 35}, SetupWindowSize),
         "Create", Signals::Button::Pressed,
-        Informations.AddEnemy,
-        std::ref(EnemyInfoTemp)
+        [this](const EnemyInfo& Information){
+            Informations.AddEnemy(Information);
+        }, EnemyInfoTemp
     );
     SetupWindow->add(CreatePlayer);
 }
@@ -263,24 +265,24 @@ void Setup::CreateTileInterface()
 
 void Setup::CreateEditorMenubar()
 {
-    tgui::MenuBar::Ptr Tools = Creators::CreateMenuBar
+    tgui::MenuBar::Ptr Tools = Creators::CreateMenubar
     ({{
         "New",{
             {"Map", []{}},
-            {"Player", this->CreatePlayerInterface},
-            {"Enemy", this->CreateEnemyInterface}
+            {"Player", [this]{CreatePlayerInterface();}},
+            {"Enemy", [this]{CreateEnemyInterface();}}
     }},{
         "Run",{
-            {"Test", []{}}
+                {"Test", []{}}
     }},{
         "Close",{
-            {"Exit", AppWindow.close}
+            {"Exit", &Setup::Exit}
     }}});
     CentralGui.add(Tools);
 }
 
 Setup::Setup() 
-    : CentralGui(AppWindow), UpdatePool(AppWindow.isOpen)
+    : UpdatePool(&Setup::IsOpen), CentralGui(AppWindow)
 {
     sf::Vector2f SetupWindowSize = {100, 170};
 
@@ -363,8 +365,9 @@ Setup::Setup()
         Getters::getCenterScale({40, 25}, SetupWindowSize),
         Getters::getScale({40, 25}, SetupWindowSize),
         "Create Map", Signals::Button::Pressed,
-        Informations.AddLayer,
-        Informations.getMapSize(),
+        [this](const sf::Vector2u& LSize, const sf::Vector2f& TSize, const std::string& Tileset){
+            Informations.AddLayer(LSize, TSize, Tileset);
+        }, Informations.getMapSize(),
         Informations.getTileSize(),
         "Tilesets/A4_Master.png"
     );
@@ -395,7 +398,7 @@ bool Setup::PollEvent(sf::Event& Event)
 
 bool Setup::handleGuiEvent(const sf::Event& Event)
 {
-    CentralGui.handleEvent(Event);
+    return CentralGui.handleEvent(Event);
 }
 
 void Setup::Exit()

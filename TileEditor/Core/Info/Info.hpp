@@ -2,9 +2,9 @@
 
 #include <json/json.h>
 
-#include "../TileMap/TileMap.hpp"
-#include "../Enemy/Core/Enemy.hpp"
-#include "../Player/Player.hpp"
+#include "../../../EngineLogic/TileMap/TileMap.hpp"
+#include "../../../EngineLogic/Enemy/Core/Enemy.hpp"
+#include "../../../EngineLogic/Player/Player.hpp"
 
 class Info
 {
@@ -37,11 +37,11 @@ public:
     ///
     ///
     ///
-    bool AddEnemy(const EnemyInfo& Info);
+    bool AddEnemy(const EnemyInfo& EnemyInfo);
     ///
     ///
     ///
-    bool SetPlayer(const PlayerInfo& Info);
+    bool SetPlayer(const PlayerInfo& PlayerInfo);
     ///
     ///
     ///

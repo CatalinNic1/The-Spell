@@ -7,7 +7,7 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 
 //
-enum class Rotation
+enum class Rotation : short
 {
     Negative = -1,
     QuadrantI,
@@ -27,6 +27,10 @@ struct TileInfo
     ///
     TileInfo(const sf::Vector2f& TextureP, const Rotation& TileR)
         : TexturePos(TextureP), TileRotation(TileR)
+    {}
+
+    TileInfo()
+        : TexturePos({-1.f, -1.f}), TileRotation(Rotation::QuadrantI)
     {}
 };
 

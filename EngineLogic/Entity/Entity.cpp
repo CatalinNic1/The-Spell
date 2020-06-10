@@ -20,7 +20,7 @@ void Entity::initEntityAnim(const std::string& TextureFilename)
 
 void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    target.draw(EntityRect);
+    target.draw(EntityRect, states);
 }
 
 bool Entity::CheckCollision(Entity& Other, const SmartRect::CollisionTypes& CollisionType)

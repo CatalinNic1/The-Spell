@@ -73,7 +73,7 @@ tgui::Label::Ptr Creators::CreateLabel(const tgui::Layout2d& Position,
     tgui::Label::Ptr Label = tgui::Label::create(DefaultText);
     Label->setHorizontalAlignment(tgui::Label::HorizontalAlignment::Center);
     Label->setPosition(Position);
-    Label->setTextSize(TextSize);
+    Label->setTextSize(static_cast< unsigned >(TextSize));
     return Label;
 }
 

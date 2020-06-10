@@ -9,9 +9,12 @@ namespace Signals = tgui::Signals;
 namespace Creators
 {
     //
-    using MenuItemsInfo = std::unordered_map< std::string, std::function< void() > >;
+    template< typename Key, typename Value >
+    using PairVector = std::vector< std::pair< Key, Value > >;
     //
-    using MenuItems = std::unordered_map< std::string, MenuItemsInfo >;
+    using MenuItemsInfo = PairVector< std::string, std::function< void() > >;
+    //
+    using MenuItems = PairVector< std::string, MenuItemsInfo >;
     //
     using StringVector = std::vector< sf::String >;
     //

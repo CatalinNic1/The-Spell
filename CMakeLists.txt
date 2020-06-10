@@ -15,26 +15,31 @@ if(CMAKE_BUILD_TYPE MATCHES "Release")
 endif()
 
 add_compile_options(-pedantic -Wall -Wextra -Wcast-align -Wcast-qual -Wctor-dtor-privacy 
-    -Wdisabled-optimization -Wformat=2 -Winit-self -Wlogical-op -Wmissing-declarations
-    -Wmissing-include-dirs -Wold-style-cast -Woverloaded-virtual -Wredundant-decls -Wshadow 
-    -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel -Wstrict-overflow=5 -Wswitch-default 
-    -Wundef -Wno-unused -Wconversion -std=c++17
+    -Wdisabled-optimization -Wformat=2 -Winit-self -Wmissing-declarations
+    -Wmissing-include-dirs -Wold-style-cast -Woverloaded-virtual -Wredundant-decls 
+    -Wshadow -Wsign-conversion -Wsign-promo -Wstrict-overflow=5 -Wswitch-default 
+    -Wundef -Wno-unused -Wconversion -std=c++2a
 )
 
 add_executable(The-Spell
-    ./Animation/Animation.cpp
-    ./CentralStuff/CoreFunctions.cpp
-    ./Enemy/IntelligentEnemy/IntelligentEnemy.cpp
-    ./Enemy/BasicEnemy/BasicEnemy.cpp
-    ./Enemy/Core/Enemy.cpp
-    ./Entity/Entity.cpp
-    ./LevelParser/LevelParser.cpp
-    ./Player/Camera/Camera.cpp
-    ./Player/EventHandler/EventHandler.cpp
-    ./Player/Player.cpp
-    ./ResourceManager/ResourceManager.cpp
-    ./SmartRect/SmartRect.cpp
-    ./TileMap/TileMap.cpp
+    ./EngineLogic/Animation/Animation.cpp
+    ./EngineLogic/CentralStuff/CoreFunctions.cpp
+    ./EngineLogic/Enemy/IntelligentEnemy/IntelligentEnemy.cpp
+    ./EngineLogic/Enemy/BasicEnemy/BasicEnemy.cpp
+    ./EngineLogic/Enemy/Core/Enemy.cpp
+    ./EngineLogic/Entity/Entity.cpp
+    ./EngineLogic/LevelParser/LevelParser.cpp
+    ./EngineLogic/Player/Camera/Camera.cpp
+    ./EngineLogic/Player/EventHandler/EventHandler.cpp
+    ./EngineLogic/Player/Player.cpp
+    ./EngineLogic/ResourceManager/ResourceManager.cpp
+    ./EngineLogic/SmartRect/SmartRect.cpp
+    ./EngineLogic/TileMap/TileMap.cpp
+    ./TileEditor/Core/Info/Info.cpp
+    ./TileEditor/Core/Widgets/CanvasUpdater/CanvasUpdater.cpp
+    ./TileEditor/Core/Widgets/Handlers/Handlers.cpp
+    ./TileEditor/Session/Setup/Setup.cpp
+    ./TileEditor/Session/EditorSession.cpp
     ./Main.cpp
 )
 

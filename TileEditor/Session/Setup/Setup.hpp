@@ -2,8 +2,8 @@
 
 #include <TGUI/TGUI.hpp>
 
-#include "../Core/Widgets/Creators/Creators.hpp"
-#include "../Core/Info/Info.hpp"
+#include "../../Core/Widgets/Creators/Creators.hpp"
+#include "../../Core/Info/Info.hpp"
 
 class Setup
 {

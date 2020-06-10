@@ -5,7 +5,7 @@ void Handlers::HandleVScrollbar(tgui::Canvas::Ptr Canvas, tgui::Scrollbar::Ptr V
     sf::View CanvasView;
     uint ViewportSize = VerticalScroll->getViewportSize() / 2;
     uint Value = VerticalScroll->getValue();
-    CanvasView.setCenter(Canvas->getView().getCenter().x, Value + ViewportSize);
+    CanvasView.setCenter(Canvas->getView().getCenter().x, static_cast< float >(Value + ViewportSize));
     CanvasView.setSize(Canvas->getSize());
     Canvas->setView(CanvasView);
 }
@@ -15,7 +15,7 @@ void Handlers::HandleHScrollbar(tgui::Canvas::Ptr Canvas, tgui::Scrollbar::Ptr H
     sf::View CanvasView;
     uint Value = HorizontalScroll->getValue();
     uint ViewportSize = HorizontalScroll->getViewportSize() / 2;
-    CanvasView.setCenter(Value + ViewportSize, Canvas->getView().getCenter().y);
+    CanvasView.setCenter(static_cast< float >(Value + ViewportSize), Canvas->getView().getCenter().y);
     CanvasView.setSize(Canvas->getSize());
     Canvas->setView(CanvasView);
 }
@@ -23,7 +23,7 @@ void Handlers::HandleHScrollbar(tgui::Canvas::Ptr Canvas, tgui::Scrollbar::Ptr H
 void Handlers::Handle2DList(tgui::ListView::Ptr ListView)
 {
     std::size_t ColumnsCount = ListView->getColumnCount();
-    float ColumnWidth = ListView->getSize().x / ColumnsCount;
+    float ColumnWidth = ListView->getSize().x / static_cast< float >(ColumnsCount);
     
     for (size_t Index = 0; Index < ColumnsCount - 1; Index++)
         ListView->setColumnWidth(Index, ColumnWidth);
