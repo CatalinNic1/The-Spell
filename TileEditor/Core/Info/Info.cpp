@@ -22,7 +22,7 @@ bool Info::FileVerification(const std::string& Filename)
 {
     try
     {
-        return std::filesystem::exists(Filename);
+        return std::filesystem::exists(std::filesystem::current_path() / Filename);
     }
     catch(std::exception& Exception)
     {

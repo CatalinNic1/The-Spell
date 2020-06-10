@@ -8,8 +8,8 @@ void Setup::CreatePlayerInterface()
 
     tgui::ChildWindow::Ptr SetupWindow = Creators::CreateChildWindow
     (
-        Getters::getCenterScale({250, 300}),
-        Getters::getScale({250, 300}),
+        Getters::getCenterScale(SetupWindowSize),
+        Getters::getScale(SetupWindowSize),
         "Player Setup",
         false, true
     );
@@ -86,8 +86,10 @@ void Setup::CreatePlayerInterface()
         Getters::getScale({75, 245}, SetupWindowSize),
         Getters::getScale({100, 35}, SetupWindowSize),
         "Create", Signals::Button::Pressed,
-        [this](const PlayerInfo& Information){
+        [this, SetupWindow](const PlayerInfo& Information){
             Informations.SetPlayer(Information);
+            SetupWindow->close();
+            SetupWindow->destroy();
         }, PlayerInfoTemp
     );
     SetupWindow->add(CreatePlayer);
@@ -99,8 +101,8 @@ void Setup::CreateEnemyInterface()
 
     tgui::ChildWindow::Ptr SetupWindow = Creators::CreateChildWindow
     (
-        Getters::getCenterScale({250, 375}),
-        Getters::getScale({250, 375}),
+        Getters::getCenterScale(SetupWindowSize),
+        Getters::getScale(SetupWindowSize),
         "Enemy Setup",
         false, true
     );
@@ -193,8 +195,10 @@ void Setup::CreateEnemyInterface()
         Getters::getScale({75, 320}, SetupWindowSize),
         Getters::getScale({100, 35}, SetupWindowSize),
         "Create", Signals::Button::Pressed,
-        [this](const EnemyInfo& Information){
+        [this, SetupWindow](const EnemyInfo& Information){
             Informations.AddEnemy(Information);
+            SetupWindow->close();
+            SetupWindow->destroy();
         }, EnemyInfoTemp
     );
     SetupWindow->add(CreatePlayer);
@@ -284,12 +288,12 @@ void Setup::CreateEditorMenubar()
 Setup::Setup() 
     : UpdatePool(&Setup::IsOpen), CentralGui(AppWindow)
 {
-    sf::Vector2f SetupWindowSize = {100, 170};
+    sf::Vector2f SetupWindowSize = {200, 340};
 
     tgui::ChildWindow::Ptr SetupWindow = Creators::CreateChildWindow
     (
-        Getters::getCenterScale({100, 170}),
-        Getters::getScale({100, 170}),
+        Getters::getCenterScale(SetupWindowSize),
+        Getters::getScale(SetupWindowSize),
         "New Map",
         false, true
     );
@@ -365,17 +369,19 @@ Setup::Setup()
         Getters::getCenterScale({40, 25}, SetupWindowSize),
         Getters::getScale({40, 25}, SetupWindowSize),
         "Create Map", Signals::Button::Pressed,
-        [this](const sf::Vector2u& LSize, const sf::Vector2f& TSize, const std::string& Tileset){
+        [this, SetupWindow](const sf::Vector2u& LSize, const sf::Vector2f& TSize, const std::string& Tileset){
             Informations.AddLayer(LSize, TSize, Tileset);
+            SetupWindow->close();
+            SetupWindow->destroy();
         }, Informations.getMapSize(),
         Informations.getTileSize(),
         "Tilesets/A4_Master.png"
     );
-    SetupWindow->add(CreateButton);
-    CentralGui.add(SetupWindow);
     
     CreateTileInterface();
     CreateEditorMenubar();
+    SetupWindow->add(CreateButton);
+    CentralGui.add(SetupWindow);
 }
 
 void Setup::draw()
@@ -401,6 +407,11 @@ bool Setup::handleGuiEvent(const sf::Event& Event)
     return CentralGui.handleEvent(Event);
 }
 
+void Setup::SetGuiView(const sf::View& View)
+{
+    CentralGui.setView(View);
+}
+
 void Setup::Exit()
 {
     AppWindow.close();
@@ -414,6 +425,16 @@ void Setup::Clear(const sf::Color& Color)
 void Setup::Display()
 {
     AppWindow.display();
+}
+
+void Setup::SetWindowView(const sf::View& View)
+{
+    AppWindow.setView(View);
+}
+
+const sf::View& Setup::GetWindowView()
+{
+    return AppWindow.getView();
 }
 
 void Setup::RemoveOrphans()

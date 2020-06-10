@@ -64,6 +64,10 @@ public:
     ///
     ///
     ///
+    void SetGuiView(const sf::View& View);
+    ///
+    ///
+    ///
     static bool IsOpen();
     ///
     ///
@@ -73,4 +77,12 @@ public:
     ///
     ///
     static void Exit();
+    ///
+    ///
+    ///
+    static void SetWindowView(const sf::View& View);
+    ///
+    ///
+    ///
+    static const sf::View& GetWindowView();
 };

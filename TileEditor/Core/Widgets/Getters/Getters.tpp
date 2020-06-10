@@ -1,5 +1,3 @@
-#pragma once
-
 #include "Getters.hpp"
 
 static std::string ToScale(float Result)

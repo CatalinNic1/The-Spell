@@ -25,24 +25,21 @@ public:
 #define DeltaTime AppCore::DeltaTime
 
 ///
-/// @brief Sleep function when unfocused 
-///
-void SleepWindow();
-///
 /// @brief Gets what player sees
 ///
 /// @return A FloatRect used for deciding if the enity needs to be updated or not
 ///
-sf::FloatRect getPerspective();
-
-sf::FloatRect getPerspective()
+static sf::FloatRect getPerspective()
 {
     sf::View Perspective = AppWindow.getView();
     sf::Vector2f Position = Perspective.getCenter() - (Perspective.getSize() / 2.f);
     return sf::FloatRect(Position, Perspective.getSize());
 }
 
-void SleepWindow()
+///
+/// @brief Sleep function when unfocused 
+///
+static void SleepWindow()
 {
     while(AppWindow.isOpen())
     {
